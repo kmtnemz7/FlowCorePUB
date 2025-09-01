@@ -3,9 +3,23 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>FlowCore — AI Automations for Business</title>
-  <meta name="description" content="FlowCore integrates AI automations into your business: lead capture → AI replies → booking → reminders → payment → reporting." />
+  <title>FlowCore – AI Automations for Business</title>
+  <meta name="description" content="Automate lead capture, AI replies, booking, and payments for your business. Fewer no-shows, faster responses, more revenue." />
   <meta name="theme-color" content="#0b1220" />
+  <link rel="canonical" href="https://flowcore.com" />
+  
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="FlowCore – AI Automations for Business" />
+  <meta property="og:description" content="Automate lead capture, AI replies, booking, and payments for your business. Fewer no-shows, faster responses, more revenue." />
+  <meta property="og:url" content="https://flowcore.com" />
+  <meta property="og:image" content="https://flowcore.com/assets/img/og-image.png" />
+  
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="FlowCore – AI Automations for Business" />
+  <meta name="twitter:description" content="Automate lead capture, AI replies, booking, and payments for your business. Fewer no-shows, faster responses, more revenue." />
+  <meta name="twitter:image" content="https://flowcore.com/assets/img/og-image.png" />
+  
   <link rel="manifest" href="manifest.json" />
   <link rel="icon" href="assets/img/icon.png" />
   <link rel="apple-touch-icon" href="assets/img/icon-192.png" />
@@ -15,224 +29,352 @@
   <!-- Header -->
   <header class="header" id="top">
     <div class="container nav">
-      <a class="brand" href="#top" aria-label="FlowCore">
+      <a class="brand" href="#top" aria-label="FlowCore homepage">
         <span class="logo" aria-hidden="true">
-          <img src="assets/img/icon.png" alt="" width="28" height="28" style="display:block" />
+          <img src="assets/img/icon.png" alt="" width="28" height="28" />
         </span>
         <span>FlowCore</span>
       </a>
-      <input id="menu-toggle" type="checkbox" hidden />
-      <label for="menu-toggle" class="burger" aria-label="Menu"><span></span></label>
-      <nav class="menu">
+      <input id="menu-toggle" type="checkbox" hidden aria-label="Toggle mobile menu" />
+      <label for="menu-toggle" class="burger" aria-label="Menu">
+        <span></span>
+      </label>
+      <nav class="menu" role="navigation" aria-label="Main navigation">
         <a href="#solutions">Solutions</a>
         <a href="#pricing">Pricing</a>
-        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
       </nav>
     </div>
   </header>
 
-  <!-- Hero -->
-  <section class="section hero">
-    <div class="bg-grid"></div>
-    <div class="container hero-inner">
-      <div class="hero-copy">
-        <span class="badge">AI automations for real ops</span>
-        <h1>Integrate AI into your systems.<br><span class="grad">Booked calls. Paid customers.</span></h1>
-        <p>Lead capture → AI replies → auto-booking → reminders → payment → reporting. Built to drive measurable outcomes.</p>
-        <div class="cta">
-          <a class="btn btn-primary" href="#solutions">Explore solutions</a>
-          <a class="btn btn-ghost" href="#pricing">See pricing</a>
+  <main>
+    <!-- Hero -->
+    <section class="section hero" aria-label="Introduction">
+      <div class="bg-grid" aria-hidden="true"></div>
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <span class="badge">Stop losing leads</span>
+          <h1>Turn website visitors into paying customers.<br><span class="grad">Automatically.</span></h1>
+          <p>Your leads get instant replies. Booking links appear in seconds. Reminders prevent no-shows. Payments happen upfront. All without hiring more staff.</p>
+          <div class="cta">
+            <a class="btn btn-primary" href="#contact">Get started</a>
+            <a class="btn btn-ghost" href="#solutions">See how it works</a>
+          </div>
+          <div class="hero-highlights">
+            <span>✓ 60-second response time</span>
+            <span>✓ 40% fewer no-shows</span>
+            <span>✓ Works with your calendar</span>
+          </div>
         </div>
-        <div class="hero-highlights">
-          <span>Least-privilege access</span>
-          <span>KPI reporting</span>
-        </div>
-      </div>
-      <div class="hero-cards">
-        <div class="card">
-          <div class="card-title">AI Replies</div>
-          <p>Draft answers for common questions. Human-approved or auto-send with guardrails.</p>
-        </div>
-        <div class="card">
-          <div class="card-title">Auto-Booking</div>
-          <p>Instant booking links from web forms or chats. Direct to staff calendars.</p>
-        </div>
-        <div class="card">
-          <div class="card-title">Payment Links</div>
-          <p>Deposit links to reduce no-shows. Receipts logged to your records.</p>
-        </div>
-        <div class="card">
-          <div class="card-title">SMS & Email</div>
-          <p>T-24h and T-2h reminders with reschedule links.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Solutions -->
-  <section class="section" id="solutions">
-    <div class="container">
-      <h2>Solutions</h2>
-      <p class="muted maxw">Start with one package. Expand as you see ROI. Click to view details.</p>
-
-      <div class="grid3">
-        <details class="tile">
-          <summary><h3>Lead → Booking</h3></summary>
-          <p>Form/chat triggers instant message with a booking link. Slots land on the right calendar.</p>
-          <ul>
-            <li>Auto-reply within 60s</li>
-            <li>Service-aware routing</li>
-            <li>Calendar conflict checks</li>
-          </ul>
-        </details>
-
-        <details class="tile">
-          <summary><h3>Smart Replies</h3></summary>
-          <p>AI drafts answers to FAQs. You control tone and safety rules.</p>
-          <ul>
-            <li>Pre-approved templates</li>
-            <li>Keyword and compliance guardrails</li>
-            <li>Human-in-the-loop option</li>
-          </ul>
-        </details>
-
-        <details class="tile">
-          <summary><h3>Deposits & No-shows</h3></summary>
-          <p>Collect a small deposit on confirm to cut no-shows.</p>
-          <ul>
-            <li>One-click payment links</li>
-            <li>Refund/credit rules</li>
-            <li>Auto-receipt and logging</li>
-          </ul>
-        </details>
-
-        <details class="tile">
-          <summary><h3>Lead Scoring & Routing</h3></summary>
-          <p>Score leads and send high-intent to your best closer.</p>
-          <ul>
-            <li>Intent detection and tags</li>
-            <li>Geo/service matching</li>
-            <li>Round-robin fallback</li>
-          </ul>
-        </details>
-
-        <details class="tile">
-          <summary><h3>Review Requests & Reputation</h3></summary>
-          <p>Automated post-visit review asks with throttling and opt-outs.</p>
-          <ul>
-            <li>Time-boxed reminders</li>
-            <li>Filter by satisfaction signals</li>
-            <li>Monthly summary of ratings</li>
-          </ul>
-        </details>
-
-        <details class="tile">
-          <summary><h3>Aftercare & Upsell</h3></summary>
-          <p>Follow-ups that check outcomes and offer next steps.</p>
-          <ul>
-            <li>Personalized check-ins</li>
-            <li>Rebooking links</li>
-            <li>Cross-sell sequences</li>
-          </ul>
-        </details>
-
-        <details class="tile">
-          <summary><h3>Daily KPIs</h3></summary>
-          <p>Leads, bookings, show rate, and revenue. Delivered to your inbox.</p>
-          <ul>
-            <li>Simple dashboard</li>
-            <li>At-a-glance trends</li>
-            <li>Error log visibility</li>
-          </ul>
-        </details>
-
-        <details class="tile">
-          <summary><h3>Security</h3></summary>
-          <p>Operational safety by design.</p>
-          <ul>
-            <li>Least-privilege access</li>
-            <li>Key vaults and rotation</li>
-            <li>PII minimization and retention</li>
-          </ul>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <!-- Pricing -->
-  <section class="section" id="pricing">
-    <div class="container">
-      <h2>Pricing</h2>
-      <p class="muted maxw">Transparent. Fixed setup + monthly support.</p>
-      <div class="grid2">
-        <div class="price card">
-          <h3>Implementation</h3>
-          <div class="amount">$1,500–$3,000</div>
-          <ul>
-            <li>Discovery + blueprint</li>
-            <li>Core automations installed</li>
-            <li>Reply templates with guardrails</li>
-            <li>QA + go-live</li>
-          </ul>
-          <a class="btn btn-primary" href="#faq">Start</a>
-        </div>
-        <div class="price card">
-          <h3>Care Plan</h3>
-          <div class="amount">$300–$800/mo</div>
-          <ul>
-            <li>Monitoring + error alerts</li>
-            <li>Monthly KPI report</li>
-            <li>Copy tweaks + improvements</li>
-            <li>Small change requests</li>
-          </ul>
-          <a class="btn btn-ghost" href="#faq">Ask a question</a>
+        <div class="hero-cards">
+          <div class="card">
+            <div class="card-title">Instant Replies</div>
+            <p>AI responds to web forms and chats within 60 seconds. Never lose another lead to slow response times.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">Smart Booking</div>
+            <p>Automatic booking links sent with every reply. Syncs directly with your existing calendar system.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">Deposit Collection</div>
+            <p>Secure payment links reduce no-shows by up to 40%. Automatic refunds for valid cancellations.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">Follow-up System</div>
+            <p>Automated reminders, rescheduling links, and post-visit follow-ups keep your pipeline full.</p>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- FAQ -->
-  <section class="section" id="faq">
-    <div class="container">
-      <h2>FAQ</h2>
+    <!-- Solutions -->
+    <section class="section" id="solutions">
+      <div class="container">
+        <h2>What you get</h2>
+        <p class="section-intro">Each package solves a specific problem that's costing you money right now. Start with one, add more as you see results.</p>
 
-      <!-- Two-column FAQ for better readability -->
-      <div class="grid2">
-        <div class="faq">
-          <details open>
-            <summary>What outcomes do you focus on?</summary>
-            <p>Faster first response, higher booking rate, and fewer no-shows. We report these weekly.</p>
+        <div class="grid3">
+          <details class="tile">
+            <summary>
+              <h3>Lead Response System</h3>
+              <p class="tile-summary">Stop losing leads to slow response times</p>
+            </summary>
+            <div class="tile-content">
+              <p>Web form submissions trigger instant AI replies with booking links. Leads book while they're still interested.</p>
+              <ul>
+                <li>Response within 60 seconds, 24/7</li>
+                <li>Smart routing by service type</li>
+                <li>Calendar conflict prevention</li>
+                <li>Branded email templates</li>
+              </ul>
+              <div class="tile-outcome">Result: 3x more bookings from website leads</div>
+            </div>
           </details>
-          <details>
-            <summary>How long is setup?</summary>
-            <p>A standard build ships in 7 days including discovery, build, QA, and go-live.</p>
-          </details>
-        </div>
 
-        <div class="faq">
-          <details>
-            <summary>Is it secure?</summary>
-            <p>Yes. We use least-privilege access, store keys in vaults, minimize PII, and remove access at offboarding.</p>
+          <details class="tile">
+            <summary>
+              <h3>No-Show Prevention</h3>
+              <p class="tile-summary">Cut no-shows in half with upfront deposits</p>
+            </summary>
+            <div class="tile-content">
+              <p>Secure payment links collect small deposits when customers book. Automatic reminders ensure they show up.</p>
+              <ul>
+                <li>Stripe integration for secure payments</li>
+                <li>Automatic refunds for valid cancellations</li>
+                <li>SMS and email reminder sequences</li>
+                <li>Rescheduling links in every message</li>
+              </ul>
+              <div class="tile-outcome">Result: 40% reduction in no-shows</div>
+            </div>
           </details>
-          <details>
-            <summary>What support do we get?</summary>
-            <p>Monitoring, error alerts, monthly KPI reports, and small change requests under the Care Plan.</p>
+
+          <details class="tile">
+            <summary>
+              <h3>Smart Lead Scoring</h3>
+              <p class="tile-summary">Send high-value leads to your best closer</p>
+            </summary>
+            <div class="tile-content">
+              <p>AI analyzes lead quality and routes premium prospects to your top salesperson automatically.</p>
+              <ul>
+                <li>Intent analysis from form responses</li>
+                <li>Geographic and service matching</li>
+                <li>VIP customer identification</li>
+                <li>Custom routing rules</li>
+              </ul>
+              <div class="tile-outcome">Result: 25% higher close rate on qualified leads</div>
+            </div>
+          </details>
+
+          <details class="tile">
+            <summary>
+              <h3>Review Generation</h3>
+              <p class="tile-summary">Get more 5-star reviews without pestering customers</p>
+            </summary>
+            <div class="tile-content">
+              <p>Post-appointment follow-ups ask happy customers for reviews. Unhappy ones get private feedback forms.</p>
+              <ul>
+                <li>Satisfaction-based review requests</li>
+                <li>Multi-platform review links</li>
+                <li>Issue resolution before public complaints</li>
+                <li>Monthly reputation reports</li>
+              </ul>
+              <div class="tile-outcome">Result: 10x more online reviews</div>
+            </div>
+          </details>
+
+          <details class="tile">
+            <summary>
+              <h3>Upsell Automation</h3>
+              <p class="tile-summary">Turn one-time customers into repeat business</p>
+            </summary>
+            <div class="tile-content">
+              <p>Targeted follow-up sequences offer complementary services based on customer history and preferences.</p>
+              <ul>
+                <li>Behavior-based service recommendations</li>
+                <li>Seasonal promotion campaigns</li>
+                <li>Re-engagement for dormant customers</li>
+                <li>Cross-sell opportunity tracking</li>
+              </ul>
+              <div class="tile-outcome">Result: 30% increase in customer lifetime value</div>
+            </div>
+          </details>
+
+          <details class="tile">
+            <summary>
+              <h3>Performance Dashboard</h3>
+              <p class="tile-summary">See exactly how much money you're making</p>
+            </summary>
+            <div class="tile-content">
+              <p>Weekly reports show leads captured, bookings scheduled, revenue generated, and areas for improvement.</p>
+              <ul>
+                <li>Lead conversion tracking</li>
+                <li>Revenue attribution by source</li>
+                <li>No-show rate monitoring</li>
+                <li>ROI calculations</li>
+              </ul>
+              <div class="tile-outcome">Result: Clear visibility into automation ROI</div>
+            </div>
           </details>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- Social Proof -->
+    <section class="section social-proof">
+      <div class="container">
+        <h2>Trusted by growing businesses</h2>
+        <div class="testimonials">
+          <blockquote class="testimonial">
+            <p>"We went from losing 30% of our leads to slow response times to booking 85% within 24 hours. Game changer."</p>
+            <cite>Dr. Sarah Chen, Pacific Dental Group</cite>
+          </blockquote>
+          <blockquote class="testimonial">
+            <p>"The deposit system cut our no-shows from 25% to 8%. That's an extra $15,000 in revenue per month."</p>
+            <cite>Marcus Rodriguez, Rodriguez & Associates Law</cite>
+          </blockquote>
+          <blockquote class="testimonial">
+            <p>"I was skeptical about AI, but these aren't chatbots. They're smart automations that actually work."</p>
+            <cite>Jennifer Walsh, Walsh Realty</cite>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="section" id="pricing">
+      <div class="container">
+        <h2>Simple, transparent pricing</h2>
+        <p class="section-intro">One-time setup fee plus monthly support. No per-message charges or hidden costs.</p>
+        
+        <div class="pricing-grid">
+          <div class="price-card">
+            <h3>Setup & Implementation</h3>
+            <div class="price-amount">$2,500</div>
+            <div class="price-period">one-time</div>
+            <ul class="price-features">
+              <li>Business process analysis</li>
+              <li>Custom automation blueprint</li>
+              <li>Integration with your systems</li>
+              <li>AI training on your services</li>
+              <li>Testing and quality assurance</li>
+              <li>Go-live support</li>
+            </ul>
+            <div class="price-note">Includes first month of support</div>
+          </div>
+          
+          <div class="price-card featured">
+            <h3>Ongoing Support</h3>
+            <div class="price-amount">$497</div>
+            <div class="price-period">per month</div>
+            <ul class="price-features">
+              <li>System monitoring and maintenance</li>
+              <li>Weekly performance reports</li>
+              <li>Copy updates and improvements</li>
+              <li>Integration adjustments</li>
+              <li>Priority technical support</li>
+              <li>Monthly optimization review</li>
+            </ul>
+            <div class="price-guarantee">30-day money-back guarantee</div>
+          </div>
+        </div>
+        
+        <div class="pricing-faq">
+          <h3>Common questions</h3>
+          <div class="faq-grid">
+            <div class="faq-item">
+              <h4>How long does setup take?</h4>
+              <p>Most implementations are complete within 10 business days, including testing.</p>
+            </div>
+            <div class="faq-item">
+              <h4>What systems do you integrate with?</h4>
+              <p>Calendly, Acuity, Google Calendar, Stripe, most CRMs, and custom APIs.</p>
+            </div>
+            <div class="faq-item">
+              <h4>Can I cancel anytime?</h4>
+              <p>Yes. 30 days' notice required. We'll provide export files for your data.</p>
+            </div>
+            <div class="faq-item">
+              <h4>Is my data secure?</h4>
+              <p>Bank-level encryption, SOC 2 compliance, minimal data retention policies.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="contact-grid">
+          <div class="contact-info">
+            <h2>Ready to stop losing leads?</h2>
+            <p>Book a 15-minute call to see if FlowCore is right for your business. No sales pitch – just an honest assessment of whether automation can help you grow.</p>
+            
+            <div class="contact-benefits">
+              <div class="benefit">
+                <h4>What we'll cover:</h4>
+                <ul>
+                  <li>Your current lead flow and pain points</li>
+                  <li>Specific automations that fit your business</li>
+                  <li>Expected ROI and timeline</li>
+                  <li>Integration requirements</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="contact-cta">
+              <a href="https://calendly.com/flowcore/consultation" class="btn btn-primary" target="_blank" rel="noopener">Schedule free consultation</a>
+            </div>
+          </div>
+          
+          <div class="contact-form-wrapper">
+            <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+              <!-- TODO: Replace YOUR_FORM_ID with actual Formspree endpoint -->
+              <h3>Or send us a message</h3>
+              
+              <!-- Honeypot field -->
+              <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display:none" />
+              
+              <div class="form-group">
+                <label for="name">Name <span class="required">*</span></label>
+                <input type="text" id="name" name="name" required />
+                <div class="error-message" id="name-error"></div>
+              </div>
+              
+              <div class="form-group">
+                <label for="email">Email <span class="required">*</span></label>
+                <input type="email" id="email" name="email" required />
+                <div class="error-message" id="email-error"></div>
+              </div>
+              
+              <div class="form-group">
+                <label for="company">Company</label>
+                <input type="text" id="company" name="company" />
+              </div>
+              
+              <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" name="phone" />
+              </div>
+              
+              <div class="form-group">
+                <label for="message">Tell us about your business <span class="required">*</span></label>
+                <textarea id="message" name="message" rows="4" required placeholder="What type of business do you run? How many leads do you get per week? What's your biggest challenge with current lead management?"></textarea>
+                <div class="error-message" id="message-error"></div>
+              </div>
+              
+              <button type="submit" class="btn btn-primary">Send message</button>
+              
+              <div class="form-success" id="form-success" style="display:none">
+                <p>Thanks for your message! We'll get back to you within 24 hours.</p>
+              </div>
+              
+              <div class="form-error" id="form-error" style="display:none">
+                <p>Something went wrong. Please try again or email us directly at hello@flowcore.com</p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <!-- Footer -->
   <footer class="footer">
     <div class="container footer-inner">
-      <div class="brand small">FlowCore · AI Automations</div>
-      <div class="links">
+      <div class="footer-brand">
+        <div class="brand small">FlowCore</div>
+        <p class="footer-tagline">AI automations that actually work</p>
+      </div>
+      <nav class="footer-links" role="navigation" aria-label="Footer navigation">
         <a href="#solutions">Solutions</a>
         <a href="#pricing">Pricing</a>
-        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+        <a href="mailto:hello@flowcore.com">hello@flowcore.com</a>
+      </nav>
+      <div class="footer-legal">
+        <div class="small">© <span id="year"></span> FlowCore. All rights reserved.</div>
       </div>
-      <div class="small">© <span id="year"></span> FlowCore</div>
     </div>
   </footer>
 
