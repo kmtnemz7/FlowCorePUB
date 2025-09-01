@@ -48,8 +48,7 @@
   }
 
   // Apply to Solutions and each FAQ column
-  const solutions = document.getElementById('solutions');
-  if (solutions) makeAccordion(solutions);
+  document.querySelectorAll('#solutions .grid3').forEach(makeAccordion);
   document.querySelectorAll('#faq .faq').forEach(makeAccordion);
 
   // Year in footer
