@@ -8,6 +8,15 @@
   --ease-spring-lite: cubic-bezier(0.4, 0, 0.2, 1);
   --elev-1: 0 2px 8px rgba(0, 0, 0, 0.08);
   --elev-2: 0 8px 24px rgba(0, 0, 0, 0.12);
+/* Colors */
+  --bg: #0b1220;
+  --bg-2: #1a2332;
+  --fg: #ffffff;
+  --fg-muted: #94a3b8;
+  --acc1: #3b82f6;
+  --acc2: #10b981;
+  --b: #334155;
+  --ring: rgba(59, 130, 246, 0.2);
 }
 
 /* Accessibility: Reduced Motion */
