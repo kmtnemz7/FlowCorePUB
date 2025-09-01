@@ -21,12 +21,12 @@
         </span>
         <span>FlowCore</span>
       </a>
-      <input id="menu-toggle" type="checkbox" hidden />
-      <label for="menu-toggle" class="burger" aria-label="Menu"><span></span></label>
-      <nav class="menu">
-        <a href="#solutions">Solutions</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#faq">FAQ</a>
+      <input id="menu-toggle" type="checkbox" hidden aria-controls="menu" />
+      <label for="menu-toggle" class="burger" aria-label="Toggle Menu" data-animate="burger"><span></span></label>
+      <nav class="menu" id="menu" data-animate="menu">
+        <a href="#solutions" data-animate="menu-item">Solutions</a>
+        <a href="#pricing" data-animate="menu-item">Pricing</a>
+        <a href="#faq" data-animate="menu-item">FAQ</a>
       </nav>
     </div>
   </header>
@@ -36,32 +36,32 @@
     <div class="bg-grid"></div>
     <div class="container hero-inner">
       <div class="hero-copy">
-        <span class="badge">AI automations for real ops</span>
+        <span class="badge" data-animate="badge">AI automations for real ops</span>
         <h1>Integrate AI into your systems.<br><span class="grad">Booked calls. Paid customers.</span></h1>
         <p>Lead capture → AI replies → auto-booking → reminders → payment → reporting. Built to drive measurable outcomes.</p>
         <div class="cta">
-          <a class="btn btn-primary" href="#solutions">Explore solutions</a>
-          <a class="btn btn-ghost" href="#pricing">See pricing</a>
+          <a class="btn btn-primary" href="#solutions" data-animate="button">Explore solutions</a>
+          <a class="btn btn-ghost" href="#pricing" data-animate="button">See pricing</a>
         </div>
         <div class="hero-highlights">
-          <span>Least-privilege access</span>
-          <span>KPI reporting</span>
+          <span data-animate="highlight">Least-privilege access</span>
+          <span data-animate="highlight">KPI reporting</span>
         </div>
       </div>
       <div class="hero-cards">
-        <div class="card">
+        <div class="card" data-animate="card">
           <div class="card-title">AI Replies</div>
           <p>Draft answers for common questions. Human-approved or auto-send with guardrails.</p>
         </div>
-        <div class="card">
+        <div class="card" data-animate="card">
           <div class="card-title">Auto-Booking</div>
           <p>Instant booking links from web forms or chats. Direct to staff calendars.</p>
         </div>
-        <div class="card">
+        <div class="card" data-animate="card">
           <div class="card-title">Payment Links</div>
           <p>Deposit links to reduce no-shows. Receipts logged to your records.</p>
         </div>
-        <div class="card">
+        <div class="card" data-animate="card">
           <div class="card-title">SMS & Email</div>
           <p>T-24h and T-2h reminders with reschedule links.</p>
         </div>
@@ -76,86 +76,97 @@
       <p class="muted maxw">Start with one package. Expand as you see ROI. Click to view details.</p>
 
       <div class="grid3">
-        <details class="tile">
-          <summary><h3>Lead → Booking</h3></summary>
-          <p>Form/chat triggers instant message with a booking link. Slots land on the right calendar.</p>
+        <details class="tile" data-animate="tile">
+          <summary><h3>Automated Appointment Booking & Reminders</h3></summary>
+          <p>AI integrates with Google Calendar or a booking tool to allow customers to schedule appointments online. It sends automatic SMS or email confirmations and reminders, reducing no-shows.</p>
           <ul>
-            <li>Auto-reply within 60s</li>
-            <li>Service-aware routing</li>
-            <li>Calendar conflict checks</li>
+            <li>Google Calendar integration</li>
+            <li>Automatic SMS/email reminders</li>
+            <li>Reduces no-shows</li>
           </ul>
         </details>
 
-        <details class="tile">
-          <summary><h3>Smart Replies</h3></summary>
-          <p>AI drafts answers to FAQs. You control tone and safety rules.</p>
+        <details class="tile" data-animate="tile">
+          <summary><h3>Customer Query Chatbot</h3></summary>
+          <p>AI chatbot on the business website or Facebook page answers FAQs, books appointments, and routes complex queries to staff. Works 24/7, improving response time without extra staff cost.</p>
           <ul>
-            <li>Pre-approved templates</li>
-            <li>Keyword and compliance guardrails</li>
-            <li>Human-in-the-loop option</li>
+            <li>24/7 FAQ responses</li>
+            <li>Appointment booking</li>
+            <li>Staff query routing</li>
           </ul>
         </details>
 
-        <details class="tile">
-          <summary><h3>Deposits & No-shows</h3></summary>
-          <p>Collect a small deposit on confirm to cut no-shows.</p>
+        <details class="tile" data-animate="tile">
+          <summary><h3>Lead Capture & Follow-Up</h3></summary>
+          <p>AI collects leads from web forms, ads, or social media messages, adds them to a CRM, and sends automated follow-up emails/SMS sequences to nurture them until conversion.</p>
           <ul>
-            <li>One-click payment links</li>
-            <li>Refund/credit rules</li>
-            <li>Auto-receipt and logging</li>
+            <li>Multi-channel lead capture</li>
+            <li>CRM integration</li>
+            <li>Automated follow-up sequences</li>
           </ul>
         </details>
 
-        <details class="tile">
-          <summary><h3>Lead Scoring & Routing</h3></summary>
-          <p>Score leads and send high-intent to your best closer.</p>
+        <details class="tile" data-animate="tile">
+          <summary><h3>Inventory & Re-Stock Alerts</h3></summary>
+          <p>AI tracks sales and stock levels in real-time. It predicts when items will run low and automatically sends purchase orders or alerts staff, avoiding lost sales.</p>
           <ul>
-            <li>Intent detection and tags</li>
-            <li>Geo/service matching</li>
-            <li>Round-robin fallback</li>
+            <li>Real-time stock tracking</li>
+            <li>Predictive restock alerts</li>
+            <li>Automated purchase orders</li>
           </ul>
         </details>
 
-        <details class="tile">
-          <summary><h3>Review Requests & Reputation</h3></summary>
-          <p>Automated post-visit review asks with throttling and opt-outs.</p>
+        <details class="tile" data-animate="tile">
+          <summary><h3>Review Request & Reputation Management</h3></summary>
+          <p>AI sends automatic review requests to customers after service, filters out negative feedback for internal follow-up, and posts positive reviews to Google or Facebook to boost reputation.</p>
           <ul>
-            <li>Time-boxed reminders</li>
-            <li>Filter by satisfaction signals</li>
-            <li>Monthly summary of ratings</li>
+            <li>Automated review requests</li>
+            <li>Negative feedback filtering</li>
+            <li>Social media review posting</li>
           </ul>
         </details>
 
-        <details class="tile">
-          <summary><h3>Aftercare & Upsell</h3></summary>
-          <p>Follow-ups that check outcomes and offer next steps.</p>
+        <details class="tile" data-animate="tile">
+          <summary><h3>Invoice & Payment Automation</h3></summary>
+          <p>AI generates invoices after a job is completed, emails them to customers, and follows up with payment reminders. Can integrate with Stripe, PayPal, or accounting software.</p>
           <ul>
-            <li>Personalized check-ins</li>
-            <li>Rebooking links</li>
-            <li>Cross-sell sequences</li>
+            <li>Automated invoice generation</li>
+            <li>Payment reminder emails</li>
+            <li>Stripe/PayPal integration</li>
           </ul>
         </details>
 
-        <details class="tile">
-          <summary><h3>Daily KPIs</h3></summary>
-          <p>Leads, bookings, show rate, and revenue. Delivered to your inbox.</p>
+        <details class="tile" data-animate="tile">
+          <summary><h3>Social Media Content Scheduling</h3></summary>
+          <p>AI plans and creates social posts based on trends, industry news, or promotions. It schedules them across Facebook, Instagram, and LinkedIn, ensuring consistent marketing.</p>
           <ul>
-            <li>Simple dashboard</li>
-            <li>At-a-glance trends</li>
-            <li>Error log visibility</li>
+            <li>Trend-based post creation</li>
+            <li>Multi-platform scheduling</li>
+            <li>Consistent marketing output</li>
           </ul>
         </details>
 
-        <details class="tile">
-          <summary><h3>Security</h3></summary>
-          <p>Operational safety by design.</p>
+        <details class="tile" data-animate="tile">
+          <summary><h3>Predictive Upselling & Cross-Selling</h3></summary>
+          <p>AI analyses customer purchase history and recommends related products/services via targeted emails or at checkout. This increases average order value.</p>
           <ul>
-            <li>Least-privilege access</li>
-            <li>Key vaults and rotation</li>
-            <li>PII minimization and retention</li>
+            <li>Purchase history analysis</li>
+            <li>Targeted email recommendations</li>
+            <li>Checkout upsell prompts</li>
+          </ul>
+        </details>
+
+        <details class="tile" data-animate="tile">
+          <summary><h3>AI Voice Receptionist</h3></summary>
+          <p>AI-powered phone assistant answers calls, provides business information, books appointments, and routes calls to the right person. Works after hours and filters spam calls.</p>
+          <ul>
+            <li>24/7 call answering</li>
+            <li>Appointment booking</li>
+            <li>Spam call filtering</li>
           </ul>
         </details>
       </div>
+      <p class="muted maxw">These are highly flexible and customizable. If you’re not sure if we can create what you want, shoot us an email at <a href="mailto:support@flowcore.systems" data-animate="link">support@flowcore.systems</a>.</p>
     </div>
   </section>
 
@@ -165,7 +176,7 @@
       <h2>Pricing</h2>
       <p class="muted maxw">Transparent. Fixed setup + monthly support.</p>
       <div class="grid2">
-        <div class="price card">
+        <div class="price card" data-animate="card">
           <h3>Implementation</h3>
           <div class="amount">$1,500–$3,000</div>
           <ul>
@@ -174,9 +185,9 @@
             <li>Reply templates with guardrails</li>
             <li>QA + go-live</li>
           </ul>
-          <a class="btn btn-primary" href="#faq">Start</a>
+          <a class="btn btn-primary" href="#faq" data-animate="button">Start</a>
         </div>
-        <div class="price card">
+        <div class="price card" data-animate="card">
           <h3>Care Plan</h3>
           <div class="amount">$300–$800/mo</div>
           <ul>
@@ -185,7 +196,7 @@
             <li>Copy tweaks + improvements</li>
             <li>Small change requests</li>
           </ul>
-          <a class="btn btn-ghost" href="#faq">Ask a question</a>
+          <a class="btn btn-ghost" href="#faq" data-animate="button">Ask a question</a>
         </div>
       </div>
     </div>
@@ -195,26 +206,23 @@
   <section class="section" id="faq">
     <div class="container">
       <h2>FAQ</h2>
-
-      <!-- Two-column FAQ for better readability -->
       <div class="grid2">
         <div class="faq">
-          <details open>
+          <details open data-animate="tile">
             <summary>What outcomes do you focus on?</summary>
             <p>Faster first response, higher booking rate, and fewer no-shows. We report these weekly.</p>
           </details>
-          <details>
+          <details data-animate="tile">
             <summary>How long is setup?</summary>
             <p>A standard build ships in 7 days including discovery, build, QA, and go-live.</p>
           </details>
         </div>
-
         <div class="faq">
-          <details>
+          <details data-animate="tile">
             <summary>Is it secure?</summary>
             <p>Yes. We use least-privilege access, store keys in vaults, minimize PII, and remove access at offboarding.</p>
           </details>
-          <details>
+          <details data-animate="tile">
             <summary>What support do we get?</summary>
             <p>Monitoring, error alerts, monthly KPI reports, and small change requests under the Care Plan.</p>
           </details>
@@ -228,13 +236,29 @@
     <div class="container footer-inner">
       <div class="brand small">FlowCore · AI Automations</div>
       <div class="links">
-        <a href="#solutions">Solutions</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#faq">FAQ</a>
+        <a href="#solutions" data-animate="footer-link">Solutions</a>
+        <a href="#pricing" data-animate="footer-link">Pricing</a>
+        <a href="#faq" data-animate="footer-link">FAQ</a>
       </div>
       <div class="small">© <span id="year"></span> FlowCore</div>
     </div>
   </footer>
+
+  <!-- Sample Modal for Lead Capture/Chatbot -->
+  <div class="modal" id="lead-capture" data-animate="modal" hidden>
+    <div class="modal-backdrop" data-animate="backdrop"></div>
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Close modal" data-animate="button">×</button>
+      <h3>Contact Us</h3>
+      <form>
+        <label for="name">Name</label>
+        <input id="name" type="text" data-animate="input" placeholder="Your name" />
+        <label for="email">Email</label>
+        <input id="email" type="email" data-animate="input" placeholder="Your email" />
+        <button type="submit" class="btn btn-primary" data-animate="button">Submit</button>
+      </form>
+    </div>
+  </div>
 
   <script src="assets/js/app.js"></script>
 </body>
