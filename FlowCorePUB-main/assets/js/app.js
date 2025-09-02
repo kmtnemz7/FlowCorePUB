@@ -28,15 +28,12 @@
   function makeAccordion(container) {
     const details = Array.from(container.querySelectorAll('details'));
     details.forEach((d) => {
-      d.addEventListener('toggle', () => {
-        if (!d.open) return;
-        details.forEach((other) => {
-          if (other !== d) other.open = false;
-        });
-      });
-      // Keyboard: allow Enter/Space on summary to toggle
+      // Accessibility: ARIA attributes
+      d.setAttribute('role', 'region');
       const sum = d.querySelector('summary');
       if (sum) {
+        sum.setAttribute('tabindex', '0');
+        sum.setAttribute('aria-expanded', d.open ? 'true' : 'false');
         sum.addEventListener('keydown', (e) => {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
@@ -44,6 +41,15 @@
           }
         });
       }
+      d.addEventListener('toggle', () => {
+        if (sum) sum.setAttribute('aria-expanded', d.open ? 'true' : 'false');
+        if (!d.open) return;
+        details.forEach((other) => {
+          if (other !== d) other.open = false;
+        });
+        // Scroll into view for opened tile (mobile friendly)
+        d.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
     });
   }
 
