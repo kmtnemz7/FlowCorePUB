@@ -190,9 +190,10 @@
     }
 
     .grad {
-      background: linear-gradient(135deg, var(--acc1), var(--acc2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+  background: linear-gradient(135deg, var(--acc1), var(--acc2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
     }
 
     .badge {
@@ -363,11 +364,13 @@
       display: flex;
       flex-wrap: wrap;
       gap: 24px;
+      width: 100%;
     }
     .grid3 > details {
-      flex: 1 1 280px;
+      flex: 1 1 320px;
       min-width: 280px;
       max-width: 400px;
+      box-sizing: border-box;
     }
 
     /* Tiles (Details) */
