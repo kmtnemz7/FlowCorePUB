@@ -365,6 +365,7 @@
       flex-wrap: wrap;
       gap: 24px;
       width: 100%;
+      align-items: flex-start;
     }
     .grid3 > details {
       flex: 1 1 320px;
