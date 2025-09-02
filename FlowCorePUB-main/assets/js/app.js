@@ -117,4 +117,62 @@
       el.classList.add('animation-end');
     }, { once: true });
   });
+
+  // Category filtering
+  const tabButtons = document.querySelectorAll('.tab-button');
+  const solutionCards = document.querySelectorAll('.solution-card');
+
+  tabButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      // Update active tab
+      tabButtons.forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+
+      const category = button.dataset.category;
+
+      // Filter cards
+      solutionCards.forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.classList.remove('hidden');
+          setTimeout(() => card.classList.add('animate-in'), 100);
+        } else {
+          card.classList.add('hidden');
+          card.classList.remove('animate-in');
+        }
+      });
+    });
+  });
+
+  // Expand/collapse functionality
+  const expandButtons = document.querySelectorAll('.expand-button');
+
+  expandButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const card = button.closest('.solution-card');
+      card.classList.toggle('expanded');
+      
+      const buttonText = card.classList.contains('expanded') ? 'Less' : 'Details';
+      button.childNodes[0].textContent = buttonText + ' ';
+    });
+  });
+
+  // Card click to expand (optional)
+  solutionCards.forEach(card => {
+    card.addEventListener('click', () => {
+      card.classList.toggle('expanded');
+      const button = card.querySelector('.expand-button');
+      const buttonText = card.classList.contains('expanded') ? 'Less' : 'Details';
+      button.childNodes[0].textContent = buttonText + ' ';
+    });
+  });
+
+  // Initial animation for solution cards
+  setTimeout(() => {
+    solutionCards.forEach((card, index) => {
+      setTimeout(() => {
+        card.classList.add('animate-in');
+      }, index * 100);
+    });
+  }, 200);
 })();
