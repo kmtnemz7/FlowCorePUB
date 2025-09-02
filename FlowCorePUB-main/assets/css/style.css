@@ -376,10 +376,16 @@
 
     /* Tiles (Details) */
     .tile {
-      background: var(--bg-2);
-      border: 1px solid var(--b);
-      border-radius: 12px;
-      overflow: hidden;
+  background: var(--bg-2);
+  border: 1px solid var(--b);
+  border-radius: 12px;
+  overflow: hidden;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+}
+.tile[open] {
+  min-height: unset;
     }
 
     .tile summary {
