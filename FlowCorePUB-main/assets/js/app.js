@@ -28,28 +28,34 @@
   function makeAccordion(container) {
     const details = Array.from(container.querySelectorAll('details'));
     details.forEach((d) => {
-      // Accessibility: ARIA attributes
       d.setAttribute('role', 'region');
       const sum = d.querySelector('summary');
       if (sum) {
         sum.setAttribute('tabindex', '0');
         sum.setAttribute('aria-expanded', d.open ? 'true' : 'false');
+        sum.addEventListener('click', (e) => {
+          e.preventDefault();
+          // Close all others
+          details.forEach((other) => {
+            if (other !== d) other.removeAttribute('open');
+          });
+          // Toggle this one
+          if (d.hasAttribute('open')) {
+            d.removeAttribute('open');
+            sum.setAttribute('aria-expanded', 'false');
+          } else {
+            d.setAttribute('open', '');
+            sum.setAttribute('aria-expanded', 'true');
+            d.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        });
         sum.addEventListener('keydown', (e) => {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
-            d.open = !d.open;
+            sum.click();
           }
         });
       }
-      d.addEventListener('toggle', () => {
-        if (sum) sum.setAttribute('aria-expanded', d.open ? 'true' : 'false');
-        if (!d.open) return;
-        details.forEach((other) => {
-          if (other !== d) other.open = false;
-        });
-        // Scroll into view for opened tile (mobile friendly)
-        d.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      });
     });
   }
 
