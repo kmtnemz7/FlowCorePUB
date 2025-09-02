@@ -360,9 +360,14 @@
     }
 
     .grid3 {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      display: flex;
+      flex-wrap: wrap;
       gap: 24px;
+    }
+    .grid3 > details {
+      flex: 1 1 280px;
+      max-width: 1fr;
+      min-width: 280px;
     }
 
     /* Tiles (Details) */
