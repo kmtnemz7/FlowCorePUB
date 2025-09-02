@@ -670,10 +670,7 @@
     font-size: clamp(2rem, 4vw, 3rem);
     font-weight: 700;
     margin-bottom: 16px;
-    background: linear-gradient(135deg, var(--acc1), var(--acc2));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #00B7FF;  /* Bright blue color from the screenshot */
 }
 
 .solutions-header p {
@@ -705,16 +702,17 @@
 }
 
 .tab-button:hover {
-    border-color: var(--acc1);
-    color: var(--acc1);
+    border-color: #00B7FF;
+    color: #00B7FF;
     transform: translateY(-1px);
+    background: rgba(0, 183, 255, 0.1);
 }
 
 .tab-button.active {
-    background: var(--acc1);
-    border-color: var(--acc1);
+    background: #00B7FF;
+    border-color: #00B7FF;
     color: white;
-    box-shadow: var(--elev-1);
+    box-shadow: 0 0 20px rgba(0, 183, 255, 0.3);
 }
 
 /* Solutions Grid */
@@ -727,8 +725,8 @@
 
 /* Enhanced Solution Cards */
 .solution-card {
-    background: var(--bg-2);
-    border: 1px solid var(--b);
+    background: rgba(26, 35, 50, 0.95);
+    border: 1px solid #334155;
     border-radius: 16px;
     overflow: hidden;
     transition: all var(--motion-med) var(--ease-spring-lite);
@@ -736,12 +734,13 @@
     position: relative;
     opacity: 1;
     transform: translateY(0);
+    backdrop-filter: blur(8px);
 }
 
 .solution-card:hover {
     transform: translateY(-8px);
-    box-shadow: var(--elev-3);
-    border-color: var(--acc1);
+    box-shadow: 0 8px 32px rgba(0, 183, 255, 0.2);
+    border-color: #00B7FF;
 }
 
 .solution-card.hidden {
@@ -753,20 +752,20 @@
 .card-header {
     position: relative;
     padding: 24px 24px 16px;
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(16, 185, 129, 0.05));
+    background: linear-gradient(135deg, rgba(0, 183, 255, 0.1), rgba(0, 183, 255, 0.05));
 }
 
 .solution-icon {
     width: 48px;
     height: 48px;
-    background: var(--acc1);
+    background: #00B7FF;
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 24px;
     margin-bottom: 16px;
-    box-shadow: var(--elev-1);
+    box-shadow: 0 4px 16px rgba(0, 183, 255, 0.3);
 }
 
 .solution-title {
@@ -778,7 +777,7 @@
 
 .solution-subtitle {
     font-size: 0.875rem;
-    color: var(--acc1);
+    color: #00B7FF;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -868,17 +867,20 @@
 .expand-button {
     background: none;
     border: none;
-    color: var(--acc1);
+    color: #00B7FF;
     font-weight: 500;
     cursor: pointer;
     display: flex;
     align-items: center;
     gap: 4px;
+    padding: 8px 12px;
+    border-radius: 6px;
     transition: all var(--motion-fast) var(--ease-standard);
 }
 
 .expand-button:hover {
-    color: var(--fg);
+    background: rgba(0, 183, 255, 0.1);
+    color: #fff;
 }
 
 .expand-icon {
@@ -893,10 +895,11 @@
 .contact-section {
     text-align: center;
     padding: 40px;
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(16, 185, 129, 0.05));
-    border: 1px solid var(--b);
+    background: linear-gradient(135deg, rgba(0, 183, 255, 0.1), rgba(0, 183, 255, 0.05));
+    border: 1px solid rgba(51, 65, 85, 0.5);
     border-radius: 16px;
     margin-top: 48px;
+    backdrop-filter: blur(8px);
 }
 
 .contact-section h3 {
@@ -912,21 +915,21 @@
 }
 
 .contact-link {
-    color: var(--acc1);
+    color: #00B7FF;
     text-decoration: none;
     font-weight: 600;
     padding: 12px 24px;
-    border: 1px solid var(--acc1);
+    border: 1px solid #00B7FF;
     border-radius: 8px;
     transition: all var(--motion-fast) var(--ease-standard);
     display: inline-block;
 }
 
 .contact-link:hover {
-    background: var(--acc1);
+    background: #00B7FF;
     color: white;
     transform: translateY(-2px);
-    box-shadow: var(--elev-1);
+    box-shadow: 0 4px 20px rgba(0, 183, 255, 0.3);
 }
 
 /* Responsive Design */
