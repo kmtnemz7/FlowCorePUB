@@ -1,14 +1,14 @@
 :root {
-      --bg: #0b1220;
-      --bg-2: #1a2332;
+      --bg: #000000;
+      --bg-2: rgba(26, 35, 50, 0.3);
       --fg: #ffffff;
       --fg-muted: #94a3b8;
-      --acc1: #3b82f6;
+      --acc1: #00B7FF;
       --acc2: #10b981;
       --acc3: #f59e0b;
       --acc4: #ef4444;
-      --b: #334155;
-      --ring: rgba(59, 130, 246, 0.2);
+      --b: rgba(255, 255, 255, 0.1);
+      --ring: rgba(0, 183, 255, 0.2);
       
       /* Motion Tokens */
       --motion-fast: 380ms;
@@ -35,10 +35,11 @@
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: var(--bg);
+      background: #000000;
       color: var(--fg);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
     }
 
     /* Container */
@@ -154,7 +155,13 @@
 
     /* Sections */
     .section {
-      padding: 80px 0;
+      padding: 40px 0;
+    }
+
+    #solutions {
+      min-height: 100vh;
+      display: flex;
+      align-items: start;
     }
 
     /* Hero */
@@ -663,14 +670,15 @@
     /* Enhanced Solutions Section */
 .solutions-header {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
 }
 
 .solutions-header h2 {
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: 48px;
     font-weight: 700;
     margin-bottom: 16px;
-    color: #00B7FF;  /* Bright blue color from the screenshot */
+    color: #00B7FF;
+    letter-spacing: -0.02em;
 }
 
 .solutions-header p {
@@ -690,43 +698,50 @@
 }
 
 .tab-button {
-    padding: 12px 20px;
+    padding: 10px 20px;
     background: transparent;
-    border: 1px solid var(--b);
-    border-radius: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
     color: var(--fg-muted);
     font-weight: 500;
     cursor: pointer;
     transition: all var(--motion-fast) var(--ease-standard);
     font-size: 14px;
+    backdrop-filter: blur(8px);
 }
 
 .tab-button:hover {
     border-color: #00B7FF;
     color: #00B7FF;
-    transform: translateY(-1px);
     background: rgba(0, 183, 255, 0.1);
 }
 
 .tab-button.active {
-    background: #00B7FF;
+    background: rgba(0, 183, 255, 0.1);
     border-color: #00B7FF;
-    color: white;
-    box-shadow: 0 0 20px rgba(0, 183, 255, 0.3);
+    color: #00B7FF;
+    box-shadow: 0 0 20px rgba(0, 183, 255, 0.2);
 }
 
 /* Solutions Grid */
 .solutions-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 24px;
     margin-bottom: 48px;
+    max-width: 100%;
+}
+
+@media (max-width: 1024px) {
+    .solutions-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* Enhanced Solution Cards */
 .solution-card {
-    background: rgba(26, 35, 50, 0.95);
-    border: 1px solid #334155;
+    background: rgba(26, 35, 50, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 16px;
     overflow: hidden;
     transition: all var(--motion-med) var(--ease-spring-lite);
@@ -734,7 +749,9 @@
     position: relative;
     opacity: 1;
     transform: translateY(0);
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(16px);
+    padding: 32px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 .solution-card:hover {
@@ -751,47 +768,53 @@
 
 .card-header {
     position: relative;
-    padding: 24px 24px 16px;
-    background: linear-gradient(135deg, rgba(0, 183, 255, 0.1), rgba(0, 183, 255, 0.05));
+    background: transparent;
+    margin-bottom: 24px;
 }
 
 .solution-icon {
-    width: 48px;
-    height: 48px;
-    background: #00B7FF;
-    border-radius: 12px;
+    width: 52px;
+    height: 52px;
+    background: rgba(0, 183, 255, 0.1);
+    border: 2px solid rgba(0, 183, 255, 0.2);
+    border-radius: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 24px;
-    margin-bottom: 16px;
-    box-shadow: 0 4px 16px rgba(0, 183, 255, 0.3);
+    margin-bottom: 20px;
+    color: #00B7FF;
+    backdrop-filter: blur(8px);
 }
 
 .solution-title {
-    font-size: 1.25rem;
+    font-size: 24px;
     font-weight: 700;
     margin-bottom: 8px;
     color: var(--fg);
+    letter-spacing: -0.02em;
 }
 
 .solution-subtitle {
-    font-size: 0.875rem;
+    font-size: 14px;
     color: #00B7FF;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
+    opacity: 0.9;
 }
 
 .card-content {
-    padding: 0 24px 24px;
+    color: var(--fg-muted);
 }
 
 .solution-description {
     color: var(--fg-muted);
-    margin-bottom: 20px;
+    margin-bottom: 24px;
     line-height: 1.6;
+    font-size: 16px;
+    opacity: 0.8;
 }
 
 .solution-features {
