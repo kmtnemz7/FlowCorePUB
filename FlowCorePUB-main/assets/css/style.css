@@ -1,11 +1,11 @@
 /* =======================
-   Theme Variables
+   THEME VARIABLES
 ======================= */
 :root {
   --bg: #0b1220;
   --bg-2: #1a2332;
   --fg: #ffffff;
-  --fg-muted: #aeb8c6; /* Increased contrast */
+  --fg-muted: #aeb8c6;
   --acc1: #3b82f6;
   --acc2: #10b981;
   --b: #334155;
@@ -16,18 +16,22 @@
   /* Motion Tokens */
   --motion-fast: 140ms;
   --motion-med: 220ms;
-  --motion-slow: 600ms; /* Slower initial load */
+  --motion-slow: 600ms;
   --ease-standard: cubic-bezier(0.2, 0, 0, 1);
   --ease-decel: cubic-bezier(0, 0, 0.2, 1);
   --ease-spring-lite: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Elevations */
   --elev-1: 0 2px 8px rgba(0, 0, 0, 0.08);
   --elev-2: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
 /* =======================
-   Reset & Base
+   RESET & BASE
 ======================= */
-* {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -46,7 +50,7 @@ body {
 }
 
 /* =======================
-   Utility Classes
+   UTILITIES
 ======================= */
 .maxw {
   max-width: 600px;
@@ -59,11 +63,9 @@ body {
   margin-bottom: 48px;
 }
 
-/* Focus states for accessibility */
 a:focus-visible,
 button:focus-visible,
-input:focus-visible,
-.summary:focus-visible {
+input:focus-visible {
   outline: none;
   border-color: var(--acc1);
   box-shadow: 0 0 0 3px var(--ring);
@@ -71,7 +73,7 @@ input:focus-visible,
 }
 
 /* =======================
-   Layout
+   LAYOUT
 ======================= */
 .container {
   max-width: 1200px;
@@ -83,20 +85,22 @@ input:focus-visible,
   padding: 80px 0;
 }
 
-.grid2 {
+.grid2,
+.grid3 {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 24px;
+}
+
+.grid2 {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
 .grid3 {
-  display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
 }
 
 /* =======================
-   Header
+   HEADER & NAV
 ======================= */
 .header {
   position: fixed;
@@ -137,9 +141,7 @@ input:focus-visible,
   border-radius: 6px;
 }
 
-/* =======================
-   Menu
-======================= */
+/* NAV LINKS */
 .menu {
   display: flex;
   gap: 32px;
@@ -157,9 +159,7 @@ input:focus-visible,
   color: var(--acc1);
 }
 
-/* =======================
-   Burger Menu (Mobile)
-======================= */
+/* BURGER MENU */
 .burger {
   display: none;
   flex-direction: column;
@@ -219,15 +219,15 @@ input:focus-visible,
 }
 
 /* =======================
-   Hero
+   HERO SECTION
 ======================= */
 .hero {
   position: relative;
   min-height: 100vh;
   display: flex;
   align-items: center;
-  overflow: hidden;
   background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+  overflow: hidden;
 }
 
 .bg-grid {
@@ -245,7 +245,6 @@ input:focus-visible,
   grid-template-columns: 1fr 1fr;
   gap: 80px;
   align-items: center;
-  position: relative;
   z-index: 1;
 }
 
@@ -293,7 +292,6 @@ input:focus-visible,
 .hero-highlights span {
   font-size: 14px;
   color: var(--fg-muted);
-  position: relative;
 }
 
 .hero-highlights span::before {
@@ -327,7 +325,7 @@ input:focus-visible,
 }
 
 /* =======================
-   Cards
+   CARD COMPONENTS
 ======================= */
 .card {
   background: var(--bg-2);
@@ -347,16 +345,10 @@ input:focus-visible,
   font-size: 16px;
   font-weight: 600;
   margin-bottom: 8px;
-  color: var(--fg);
-}
-
-.card p {
-  color: var(--fg-muted);
-  font-size: 14px;
 }
 
 /* =======================
-   Buttons
+   BUTTONS
 ======================= */
 .btn {
   display: inline-flex;
@@ -366,10 +358,10 @@ input:focus-visible,
   border-radius: 8px;
   font-weight: 500;
   text-decoration: none;
-  transition: transform var(--motion-fast) var(--ease-standard), box-shadow var(--motion-fast) var(--ease-standard), filter var(--motion-fast) var(--ease-standard);
+  font-size: 16px;
   border: 1px solid transparent;
   cursor: pointer;
-  font-size: 16px;
+  transition: transform var(--motion-fast), box-shadow var(--motion-fast), filter var(--motion-fast);
 }
 
 .btn-primary {
@@ -396,38 +388,31 @@ input:focus-visible,
 }
 
 /* =======================
-   Animations
+   ANIMATIONS
 ======================= */
-[data-animate="card"],
-[data-animate="badge"],
-[data-animate="highlight"] {
+[data-animate] {
   transition: opacity var(--motion-slow) var(--ease-decel), transform var(--motion-slow) var(--ease-spring-lite);
   transform: translateY(8px);
   opacity: 0;
-  will-change: transform, opacity;
 }
 
 .animate-in {
   transform: translateY(0);
   opacity: 1;
 }
+
 /* =======================
-   Solutions Grid Cards
+   SOLUTIONS GRID
 ======================= */
 .solution-card {
   background: var(--bg-2);
   border: 1px solid var(--b);
   border-radius: var(--border-radius);
   padding: 20px;
-  transition:
-    border-color var(--motion-med) var(--ease-decel),
-    box-shadow var(--motion-med) var(--ease-decel),
-    transform var(--motion-med) var(--ease-decel),
-    max-height var(--motion-slow) var(--ease-standard),
-    padding var(--motion-slow) var(--ease-standard);
   overflow: hidden;
-  max-height: 280px; /* collapsed height */
+  max-height: 280px;
   cursor: pointer;
+  transition: border-color var(--motion-med), box-shadow var(--motion-med), transform var(--motion-med), max-height var(--motion-slow), padding var(--motion-slow);
 }
 
 .solution-card:hover {
@@ -437,26 +422,13 @@ input:focus-visible,
 }
 
 .solution-card.expanded {
-  max-height: 1000px; /* enough space for all content */
+  max-height: 1000px;
   padding: 24px;
 }
 
-.solution-card .card-content,
-.solution-card .solution-features {
-  opacity: 1;
-  transition: opacity var(--motion-fast) var(--ease-standard);
-}
-
-.solution-card:not(.expanded) .card-content,
-.solution-card:not(.expanded) .solution-features {
-  opacity: 0;
-  pointer-events: none;
-}
-
-/* Optional: smooth icon rotation */
 .expand-button .expand-icon {
   display: inline-block;
-  transition: transform var(--motion-fast) var(--ease-standard);
+  transition: transform var(--motion-fast);
 }
 
 .solution-card.expanded .expand-icon {
