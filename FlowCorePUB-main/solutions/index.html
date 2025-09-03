@@ -160,14 +160,18 @@
 <body>
   <!-- Header -->
   <header class="header" id="top">
-    <div class="container">
-      <a class="brand" href="/index.html" aria-label="FlowCore" style="display:inline-flex;align-items:center;gap:10px">
-        <span class="logo" aria-hidden="true"><img src="/assets/img/icon.png" alt="" width="28" height="28" /></span>
+    <div class="container nav">
+      <a class="brand" href="/" aria-label="FlowCore">
+        <span class="logo" aria-hidden="true">
+          <img src="/assets/img/icon.png" alt="" width="28" height="28" />
+        </span>
         <span>FlowCore</span>
       </a>
-      <nav class="menu" style="float:right;display:inline-flex;gap:18px">
-        <a href="/solutions" class="active">Solutions</a>
-        <a href="/pricing">Pricing</a>
+      <input id="menu-toggle" type="checkbox" hidden aria-controls="menu" />
+      <label for="menu-toggle" class="burger" aria-label="Toggle Menu"><span></span></label>
+      <nav class="menu" id="menu">
+        <a href="/solutions">Solutions</a>
+        <a href="/pricing" class="active">Pricing</a>
         <a href="/faq">FAQ</a>
         <a href="/contact">Contact</a>
       </nav>
