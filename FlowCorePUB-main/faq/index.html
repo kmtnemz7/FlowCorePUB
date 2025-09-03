@@ -11,94 +11,73 @@
   <link rel="apple-touch-icon" href="/assets/img/icon-192.png" />
   <link rel="stylesheet" href="/assets/css/style.css" />
   <style>
-    /* FAQ-specific styles */
-    .faq-toolbar {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      justify-content: flex-end;
-      margin: 12px 0 28px;
-      flex-wrap: wrap;
-    }
-    .faq-actions {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-    .btn-small {
-      font-size: 14px;
-      padding: 10px 14px;
-      border-radius: 8px;
-      border: 1px solid var(--b);
-      background: transparent;
-      color: var(--fg);
-      cursor: pointer;
-      transition: all var(--motion-fast) var(--ease-standard);
-    }
-    .btn-small:hover {
-      border-color: var(--acc1);
-      color: var(--acc1);
-      transform: translateY(-1px);
+    :root{
+      --bg:#0b1220;--bg-2:#1a2332;--fg:#fff;--fg-muted:#94a3b8;
+      --acc1:#3b82f6;--b:#334155;--ring:rgba(59,130,246,.2);
+      --elev-1:0 2px 8px rgba(0,0,0,.18);
+      --ease:cubic-bezier(.2,0,0,1);--fast:200ms;--med:380ms;
     }
 
-    /* Details/summary look */
-    .faq details {
-      background: var(--bg-2);
-      border: 1px solid var(--b);
-      border-radius: 10px;
-      margin-bottom: 12px;
-      overflow: hidden;
-      transition: border-color var(--motion-fast) var(--ease-standard), box-shadow var(--motion-fast) var(--ease-standard);
+    /* Page heading */
+    .page-head{ text-align:center; margin:20px 0 8px }
+    .page-title{
+      font-size:clamp(2rem,4vw,3rem); font-weight:800; margin:0 0 8px;
+      background:linear-gradient(135deg,var(--acc1),#10b981);
+      -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
     }
-    .faq details[open] {
-      border-color: var(--acc1);
-      box-shadow: var(--elev-1);
-    }
+    .page-sub{ color:var(--fg-muted); max-width:780px; margin:0 auto 18px }
 
-    .faq summary {
-      list-style: none;
-      padding: 18px 20px;
-      cursor: pointer;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      user-select: none;
+    /* Actions */
+    .faq-toolbar{ display:flex; justify-content:center; gap:10px; margin:8px 0 26px }
+    .btn-small{
+      font-size:14px; padding:10px 14px; border-radius:8px;
+      border:1px solid var(--b); background:transparent; color:var(--fg); cursor:pointer;
+      transition:all var(--fast) var(--ease)
     }
-    .faq summary::-webkit-details-marker {
-      display: none;
-    }
+    .btn-small:hover{ border-color:var(--acc1); color:var(--acc1); transform:translateY(-1px) }
 
-    .faq-caret {
-      width: 18px;
-      height: 18px;
-      border: 2px solid var(--fg-muted);
-      border-left: 0;
-      border-top: 0;
-      transform: rotate(45deg);
-      transition: transform var(--motion-fast) var(--ease-standard), border-color var(--motion-fast) var(--ease-standard);
-    }
-    details[open] > summary .faq-caret {
-      transform: rotate(-135deg);
-      border-color: var(--acc1);
-    }
+    /* Two columns */
+    .grid2{ display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:16px; margin-top:8px }
 
-    .faq-body {
-      padding: 0 20px 18px 46px;
-      color: var(--fg-muted);
-      line-height: 1.6;
-      display: grid;
-      grid-template-rows: 0fr;
-      transition: grid-template-rows var(--motion-med) var(--ease-decel), opacity var(--motion-med) var(--ease-decel);
-      opacity: 0;
+    /* FAQ items */
+    .faq details{
+      background:var(--bg-2); border:1px solid var(--b); border-radius:10px; overflow:hidden;
+      transition:border-color var(--fast) var(--ease), box-shadow var(--fast) var(--ease)
     }
-    details[open] .faq-body {
-      grid-template-rows: 1fr;
-      opacity: 1;
+    .faq details[open]{ border-color:var(--acc1); box-shadow:var(--elev-1) }
+
+    .faq summary{
+      list-style:none; padding:18px 20px; cursor:pointer; font-weight:700;
+      display:flex; align-items:center; gap:10px; user-select:none
     }
-    .faq-body > div {
-      overflow: hidden;
+    .faq summary::-webkit-details-marker{ display:none }
+    .faq-caret{
+      width:18px; height:18px; border:2px solid var(--fg-muted); border-left:0; border-top:0;
+      transform:rotate(45deg); transition:transform var(--fast) var(--ease), border-color var(--fast) var(--ease)
     }
+    details[open] > summary .faq-caret{ transform:rotate(-135deg); border-color:var(--acc1) }
+
+    .faq-body{
+      padding:0 20px 18px 46px; color:var(--fg-muted); line-height:1.6;
+      display:grid; grid-template-rows:1fr; opacity:1; /* visible by default */
+      transition:grid-template-rows var(--med) var(--ease), opacity var(--med) var(--ease)
+    }
+    .faq-body > div{ overflow:hidden }
+
+    /* CTA */
+    .contact-section{
+      margin-top:32px; padding:28px; border:1px solid var(--b); border-radius:16px;
+      background:linear-gradient(135deg,rgba(59,130,246,.08),rgba(16,185,129,.06))
+    }
+    .contact-section h3{ margin:0 0 8px; font-size:1.35rem }
+    .contact-section p{ margin:0 0 10px; color:var(--fg-muted) }
+    .contact-link{ color:var(--acc1); font-weight:800; text-decoration:none; border-bottom:1px solid var(--acc1) }
+    .contact-link:hover{ filter:brightness(1.1) }
+
+    /* Layout */
+    body{ background:var(--bg); color:var(--fg) }
+    .section{ padding:80px 0 }
+    .container{ max-width:1200px; margin:0 auto; padding:0 20px }
   </style>
 </head>
 <body>
@@ -106,9 +85,7 @@
   <header class="header" id="top">
     <div class="container nav">
       <a class="brand" href="/" aria-label="FlowCore">
-        <span class="logo" aria-hidden="true">
-          <img src="/assets/img/icon.png" alt="" width="28" height="28" />
-        </span>
+        <span class="logo" aria-hidden="true"><img src="/assets/img/icon.png" alt="" width="28" height="28" /></span>
         <span>FlowCore</span>
       </a>
       <input id="menu-toggle" type="checkbox" hidden aria-controls="menu" />
@@ -125,42 +102,41 @@
   <!-- FAQ -->
   <section class="section" id="faq" style="margin-top:80px;">
     <div class="container">
-      <h2>FAQ</h2>
-      <p class="muted maxw">Key info on outcomes, setup, security, support, pricing, and integrations.</p>
+      <div class="page-head">
+        <h2 class="page-title">FAQ</h2>
+        <p class="page-sub">Key info on outcomes, setup, security, support, pricing, and integrations.</p>
+      </div>
 
-      <!-- Actions only -->
       <div class="faq-toolbar">
-        <div class="faq-actions">
-          <button class="btn-small" id="faq-expand">Expand all</button>
-          <button class="btn-small" id="faq-collapse">Collapse all</button>
-        </div>
+        <button class="btn-small" id="faq-expand">Expand all</button>
+        <button class="btn-small" id="faq-collapse">Collapse all</button>
       </div>
 
       <div class="grid2">
         <!-- Column 1 -->
         <div class="faq" data-faq-col="1">
-          <details id="faq-outcomes" data-animate="tile" open>
+          <details id="faq-outcomes" open>
             <summary><span class="faq-caret"></span>What outcomes do you focus on?</summary>
             <div class="faq-body"><div>
               Faster first response, higher booking rate, and fewer no-shows. We track and report these weekly.
             </div></div>
           </details>
 
-          <details id="faq-setup" data-animate="tile">
+          <details id="faq-setup" open>
             <summary><span class="faq-caret"></span>How long does setup take?</summary>
             <div class="faq-body"><div>
               A standard build ships in 7 days including discovery, build, QA, and go-live.
             </div></div>
           </details>
 
-          <details id="faq-requirements" data-animate="tile">
+          <details id="faq-requirements" open>
             <summary><span class="faq-caret"></span>What do you need from us to start?</summary>
             <div class="faq-body"><div>
               Access to calendars/booking tools, messaging channels (email/SMS), and basic copy or brand tone. We follow least-privilege access.
             </div></div>
           </details>
 
-          <details id="faq-human-loop" data-animate="tile">
+          <details id="faq-human-loop" open>
             <summary><span class="faq-caret"></span>Can we keep a human in the loop?</summary>
             <div class="faq-body"><div>
               Yes. Start in “draft then approve” mode, then graduate to auto-send with guardrails per channel or intent.
@@ -170,28 +146,28 @@
 
         <!-- Column 2 -->
         <div class="faq" data-faq-col="2">
-          <details id="faq-security" data-animate="tile">
+          <details id="faq-security" open>
             <summary><span class="faq-caret"></span>Is it secure?</summary>
             <div class="faq-body"><div>
               Yes. We use least-privilege access, store keys in vaults, minimize PII, and remove access at offboarding. Audit logs available on request.
             </div></div>
           </details>
 
-          <details id="faq-support" data-animate="tile">
+          <details id="faq-support" open>
             <summary><span class="faq-caret"></span>What support do we get?</summary>
             <div class="faq-body"><div>
               Monitoring, error alerts, monthly KPI reports, and small change requests under the Care Plan.
             </div></div>
           </details>
 
-          <details id="faq-pricing" data-animate="tile">
+          <details id="faq-pricing" open>
             <summary><span class="faq-caret"></span>How is pricing structured?</summary>
             <div class="faq-body"><div>
               Fixed implementation plus a monthly Care Plan. See <a href="/pricing">Pricing</a> for current tiers.
             </div></div>
           </details>
 
-          <details id="faq-integrations" data-animate="tile">
+          <details id="faq-integrations" open>
             <summary><span class="faq-caret"></span>Which tools do you integrate with?</summary>
             <div class="faq-body"><div>
               Commonly Google Calendar, Outlook, Stripe, PayPal, HubSpot, Salesforce, Facebook, and website chat. Ask about others.
@@ -201,7 +177,7 @@
       </div>
 
       <!-- Contact CTA -->
-      <div class="contact-section" style="margin-top:32px;">
+      <div class="contact-section">
         <h3>Still have questions?</h3>
         <p>We’ll respond quickly with specifics for your workflow.</p>
         <a href="mailto:support@flowcore.systems" class="contact-link">Email support@flowcore.systems</a>
@@ -225,51 +201,12 @@
 
   <script src="/assets/js/app.js"></script>
   <script>
-    // Single-open-per-column accordion
-    document.querySelectorAll('.faq').forEach(col => {
-      const items = Array.from(col.querySelectorAll('details'));
-      items.forEach(d => {
-        d.querySelector('summary')?.addEventListener('click', () => {
-          setTimeout(() => {
-            if (d.open) {
-              items.forEach(o => { if (o !== d) o.open = false; });
-              history.replaceState(null, '', '#' + d.id);
-            } else if (location.hash.slice(1) === d.id) {
-              history.replaceState(null, '', location.pathname);
-            }
-          }, 0);
-        });
-      });
-    });
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Deep-linking: open item from hash
-    function openFromHash() {
-      const id = location.hash.slice(1);
-      if (!id) return;
-      const el = document.getElementById(id);
-      if (el && el.tagName.toLowerCase() === 'details') {
-        const col = el.closest('.faq');
-        col?.querySelectorAll('details').forEach(o => { if (o !== el) o.open = false; });
-        el.open = true;
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    }
-    window.addEventListener('hashchange', openFromHash);
-    openFromHash();
-
-    // Expand/collapse controls
-    const btnExpand = document.getElementById('faq-expand');
-    const btnCollapse = document.getElementById('faq-collapse');
+    // Expand / collapse all
     const allDetails = Array.from(document.querySelectorAll('.faq details'));
-
-    btnExpand.addEventListener('click', () => {
-      allDetails.forEach(d => d.open = true);
-    });
-
-    btnCollapse.addEventListener('click', () => {
-      allDetails.forEach(d => d.open = false);
-      history.replaceState(null, '', location.pathname);
-    });
+    document.getElementById('faq-expand').addEventListener('click', () => allDetails.forEach(d => d.open = true));
+    document.getElementById('faq-collapse').addEventListener('click', () => allDetails.forEach(d => d.open = false));
   </script>
 </body>
 </html>
