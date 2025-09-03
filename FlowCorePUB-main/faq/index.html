@@ -16,24 +16,9 @@
       display: flex;
       gap: 12px;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-end;
       margin: 12px 0 28px;
       flex-wrap: wrap;
-    }
-    #faq-search {
-      width: min(720px, 100%);
-      background: var(--bg-2);
-      color: var(--fg);
-      border: 1px solid var(--b);
-      border-radius: 10px;
-      padding: 12px 14px;
-      font-size: 16px;
-      outline: none;
-      transition: box-shadow var(--motion-fast) var(--ease-standard), border-color var(--motion-fast) var(--ease-standard);
-    }
-    #faq-search:focus {
-      border-color: var(--acc1);
-      box-shadow: 0 0 0 3px var(--ring);
     }
     .faq-actions {
       display: flex;
@@ -50,7 +35,11 @@
       cursor: pointer;
       transition: all var(--motion-fast) var(--ease-standard);
     }
-    .btn-small:hover { border-color: var(--acc1); color: var(--acc1); transform: translateY(-1px); }
+    .btn-small:hover {
+      border-color: var(--acc1);
+      color: var(--acc1);
+      transform: translateY(-1px);
+    }
 
     /* Details/summary look */
     .faq details {
@@ -61,7 +50,10 @@
       overflow: hidden;
       transition: border-color var(--motion-fast) var(--ease-standard), box-shadow var(--motion-fast) var(--ease-standard);
     }
-    .faq details[open] { border-color: var(--acc1); box-shadow: var(--elev-1); }
+    .faq details[open] {
+      border-color: var(--acc1);
+      box-shadow: var(--elev-1);
+    }
 
     .faq summary {
       list-style: none;
@@ -73,7 +65,9 @@
       gap: 10px;
       user-select: none;
     }
-    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::-webkit-details-marker {
+      display: none;
+    }
 
     .faq-caret {
       width: 18px;
@@ -84,7 +78,10 @@
       transform: rotate(45deg);
       transition: transform var(--motion-fast) var(--ease-standard), border-color var(--motion-fast) var(--ease-standard);
     }
-    details[open] > summary .faq-caret { transform: rotate(-135deg); border-color: var(--acc1); }
+    details[open] > summary .faq-caret {
+      transform: rotate(-135deg);
+      border-color: var(--acc1);
+    }
 
     .faq-body {
       padding: 0 20px 18px 46px;
@@ -95,19 +92,13 @@
       transition: grid-template-rows var(--motion-med) var(--ease-decel), opacity var(--motion-med) var(--ease-decel);
       opacity: 0;
     }
-    details[open] .faq-body { grid-template-rows: 1fr; opacity: 1; }
-    .faq-body > div { overflow: hidden; }
-
-    /* Search highlight */
-    mark.faq-hit {
-      background: rgba(59,130,246,0.25);
-      color: inherit;
-      padding: 0 2px;
-      border-radius: 3px;
+    details[open] .faq-body {
+      grid-template-rows: 1fr;
+      opacity: 1;
     }
-
-    /* Hide when filtered out */
-    .faq details[data-hidden="true"] { display: none; }
+    .faq-body > div {
+      overflow: hidden;
+    }
   </style>
 </head>
 <body>
@@ -137,13 +128,11 @@
       <h2>FAQ</h2>
       <p class="muted maxw">Key info on outcomes, setup, security, support, pricing, and integrations.</p>
 
-      <!-- Toolbar: search + actions -->
+      <!-- Actions only -->
       <div class="faq-toolbar">
-        <input id="faq-search" type="search" placeholder="Search questions… (e.g. pricing, security, calendar)" aria-label="Search FAQ" />
         <div class="faq-actions">
           <button class="btn-small" id="faq-expand">Expand all</button>
           <button class="btn-small" id="faq-collapse">Collapse all</button>
-          <button class="btn-small" id="faq-clear">Clear search</button>
         </div>
       </div>
 
@@ -240,14 +229,13 @@
     document.querySelectorAll('.faq').forEach(col => {
       const items = Array.from(col.querySelectorAll('details'));
       items.forEach(d => {
-        d.querySelector('summary')?.addEventListener('click', (e) => {
-          // native toggling happens after click; delay to read state
+        d.querySelector('summary')?.addEventListener('click', () => {
           setTimeout(() => {
             if (d.open) {
               items.forEach(o => { if (o !== d) o.open = false; });
               history.replaceState(null, '', '#' + d.id);
             } else if (location.hash.slice(1) === d.id) {
-              history.replaceState(null, '', location.pathname); // remove hash if closing current
+              history.replaceState(null, '', location.pathname);
             }
           }, 0);
         });
@@ -260,7 +248,6 @@
       if (!id) return;
       const el = document.getElementById(id);
       if (el && el.tagName.toLowerCase() === 'details') {
-        // close siblings in same column
         const col = el.closest('.faq');
         col?.querySelectorAll('details').forEach(o => { if (o !== el) o.open = false; });
         el.open = true;
@@ -270,85 +257,13 @@
     window.addEventListener('hashchange', openFromHash);
     openFromHash();
 
-    // Search, highlight, expand/collapse controls
-    const searchInput = document.getElementById('faq-search');
+    // Expand/collapse controls
     const btnExpand = document.getElementById('faq-expand');
     const btnCollapse = document.getElementById('faq-collapse');
-    const btnClear = document.getElementById('faq-clear');
-
     const allDetails = Array.from(document.querySelectorAll('.faq details'));
 
-    function clearHighlights(root) {
-      root.querySelectorAll('mark.faq-hit').forEach(m => {
-        const text = document.createTextNode(m.textContent);
-        m.replaceWith(text);
-      });
-    }
-
-    function highlight(text, q) {
-      if (!q) return text;
-      const re = new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig');
-      return text.replace(re, '<mark class="faq-hit">$1</mark>');
-    }
-
-    function filterFAQ(q) {
-      const term = q.trim().toLowerCase();
-      let firstShown = null;
-
-      allDetails.forEach(d => {
-        d.removeAttribute('data-hidden');
-        // clear previous marks
-        clearHighlights(d);
-
-        const summaryEl = d.querySelector('summary');
-        const bodyEl = d.querySelector('.faq-body');
-
-        const sumText = summaryEl ? summaryEl.textContent : '';
-        const bodyText = bodyEl ? bodyEl.textContent : '';
-
-        if (!term || sumText.toLowerCase().includes(term) || bodyText.toLowerCase().includes(term)) {
-          // show
-          d.removeAttribute('data-hidden');
-
-          // add highlights
-          if (term) {
-            if (summaryEl) {
-              const raw = summaryEl.innerText.replace(/^\s+|\s+$/g, '');
-              summaryEl.innerHTML = '<span class="faq-caret"></span>' + highlight(raw, term);
-            }
-            if (bodyEl) {
-              const rawBody = bodyEl.innerText;
-              bodyEl.innerHTML = '<div>' + highlight(rawBody, term) + '</div>';
-            }
-          }
-
-          if (!firstShown) firstShown = d;
-        } else {
-          // hide
-          d.setAttribute('data-hidden', 'true');
-          d.open = false;
-        }
-      });
-
-      // Open the first visible match for quick preview
-      if (firstShown) {
-        const col = firstShown.closest('.faq');
-        col?.querySelectorAll('details').forEach(o => { if (o !== firstShown) o.open = false; });
-        firstShown.open = true;
-      }
-    }
-
-    searchInput.addEventListener('input', (e) => filterFAQ(e.target.value));
-    btnClear.addEventListener('click', () => {
-      searchInput.value = '';
-      filterFAQ('');
-      history.replaceState(null, '', location.pathname);
-    });
-
     btnExpand.addEventListener('click', () => {
-      const visible = allDetails.filter(d => !d.hasAttribute('data-hidden'));
-      // expand per column but keep usability: allow multiple open when expanding all
-      visible.forEach(d => d.open = true);
+      allDetails.forEach(d => d.open = true);
     });
 
     btnCollapse.addEventListener('click', () => {
