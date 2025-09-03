@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FAQ — FlowCore</title>
+  <meta name="description" content="Answers to common questions about FlowCore’s AI automations, setup, security, and support." />
+  <meta name="theme-color" content="#0b1220" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" href="/assets/img/icon.png" />
+  <link rel="apple-touch-icon" href="/assets/img/icon-192.png" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
+</head>
+<body>
+  <!-- Header -->
+  <header class="header" id="top">
+    <div class="container nav">
+      <a class="brand" href="/" aria-label="FlowCore">
+        <span class="logo" aria-hidden="true">
+          <img src="/assets/img/icon.png" alt="" width="28" height="28" />
+        </span>
+        <span>FlowCore</span>
+      </a>
+      <input id="menu-toggle" type="checkbox" hidden aria-controls="menu" />
+      <label for="menu-toggle" class="burger" aria-label="Toggle Menu"><span></span></label>
+      <nav class="menu" id="menu">
+        <a href="/solutions">Solutions</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/faq" class="active">FAQ</a>
+        <a href="/contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- FAQ -->
+  <section class="section" id="faq" style="margin-top:80px;">
+    <div class="container">
+      <h2>FAQ</h2>
+      <p class="muted maxw">Key info on outcomes, setup, security, support, pricing, and integrations.</p>
+
+      <div class="grid2">
+        <!-- Column 1 -->
+        <div class="faq">
+          <details open data-animate="tile">
+            <summary>What outcomes do you focus on?</summary>
+            <p>Faster first response, higher booking rate, and fewer no-shows. We track and report these weekly.</p>
+          </details>
+
+          <details data-animate="tile">
+            <summary>How long does setup take?</summary>
+            <p>A standard build ships in 7 days including discovery, build, QA, and go-live.</p>
+          </details>
+
+          <details data-animate="tile">
+            <summary>What do you need from us to start?</summary>
+            <p>Access to calendars/booking tools, messaging channels (email/SMS), and basic copy or brand tone. We follow least-privilege access.</p>
+          </details>
+
+          <details data-animate="tile">
+            <summary>Can we keep a human in the loop?</summary>
+            <p>Yes. You can start in “draft then approve” mode, then graduate to auto-send with guardrails per channel or intent.</p>
+          </details>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="faq">
+          <details data-animate="tile">
+            <summary>Is it secure?</summary>
+            <p>Yes. We use least-privilege access, store keys in vaults, minimize PII, and remove access at offboarding. Audit logs available on request.</p>
+          </details>
+
+          <details data-animate="tile">
+            <summary>What support do we get?</summary>
+            <p>Monitoring, error alerts, monthly KPI reports, and small change requests under the Care Plan.</p>
+          </details>
+
+          <details data-animate="tile">
+            <summary>How is pricing structured?</summary>
+            <p>Fixed implementation plus a monthly Care Plan. See <a href="/pricing">Pricing</a> for current tiers.</p>
+          </details>
+
+          <details data-animate="tile">
+            <summary>Which tools do you integrate with?</summary>
+            <p>Commonly Google Calendar, Outlook, Stripe, PayPal, HubSpot, Salesforce, Facebook, and website chat. Ask about others.</p>
+          </details>
+        </div>
+      </div>
+
+      <!-- Contact CTA -->
+      <div class="contact-section" style="margin-top:32px;">
+        <h3>Still have questions?</h3>
+        <p>We’ll respond quickly with specifics for your workflow.</p>
+        <a href="mailto:support@flowcore.systems" class="contact-link">Email support@flowcore.systems</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="brand small">FlowCore · AI Automations</div>
+      <div class="links">
+        <a href="/solutions">Solutions</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/faq">FAQ</a>
+        <a href="/contact">Contact</a>
+      </div>
+      <div class="small">© <span id="year"></span> FlowCore</div>
+    </div>
+  </footer>
+
+  <script src="/assets/js/app.js"></script>
+</body>
+</html>
