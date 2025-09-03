@@ -11,68 +11,148 @@
   <link rel="apple-touch-icon" href="/assets/img/icon-192.png" />
   <link rel="stylesheet" href="/assets/css/style.css" />
   <style>
-    :root{
-      --bg:#0b1220;--bg-2:#1a2332;--fg:#fff;--fg-muted:#94a3b8;
-      --acc1:#3b82f6;--b:#334155;--ring:rgba(59,130,246,.2);
+    :root {
+      --bg:#0b1220;
+      --bg-2:#1a2332;
+      --fg:#fff;
+      --fg-muted:#94a3b8;
+      --acc1:#3b82f6;
+      --b:#334155;
+      --ring:rgba(59,130,246,.2);
       --elev-1:0 2px 8px rgba(0,0,0,.18);
-      --ease:cubic-bezier(.2,0,0,1);--fast:200ms;--med:380ms;
+      --ease:cubic-bezier(.2,0,0,1);
+      --fast:200ms;
+      --med:380ms;
     }
 
     /* Actions */
-    .faq-toolbar{ display:flex; justify-content:center; gap:10px; margin:8px 0 26px }
-    .btn-small{
-      font-size:14px; padding:10px 14px; border-radius:8px;
-      border:1px solid var(--b); background:transparent; color:var(--fg); cursor:pointer;
-      transition:all var(--fast) var(--ease)
+    .faq-toolbar {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 8px 0 26px;
     }
-    .btn-small:hover{ border-color:var(--acc1); color:var(--acc1); transform:translateY(-1px) }
+    .btn-small {
+      font-size: 14px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--b);
+      background: transparent;
+      color: var(--fg);
+      cursor: pointer;
+      transition: all var(--fast) var(--ease);
+    }
+    .btn-small:hover {
+      border-color: var(--acc1);
+      color: var(--acc1);
+      transform: translateY(-1px);
+    }
 
     /* Two columns */
-    .grid2{ display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:16px; margin-top:8px }
+    .grid2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(320px,1fr));
+      gap: 16px;
+      margin-top: 8px;
+    }
 
     /* FAQ items */
-    .faq details{
-      background:var(--bg-2); border:1px solid var(--b); border-radius:10px; overflow:hidden;
-      transition:border-color var(--fast) var(--ease), box-shadow var(--fast) var(--ease)
+    .faq details {
+      background: var(--bg-2);
+      border: 1px solid var(--b);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: border-color var(--fast) var(--ease), box-shadow var(--fast) var(--ease);
     }
-    .faq details[open]{ border-color:var(--acc1); box-shadow:var(--elev-1) }
+    .faq details[open] {
+      border-color: var(--acc1);
+      box-shadow: var(--elev-1);
+    }
 
-    .faq summary{
-      list-style:none; padding:18px 20px; cursor:pointer; font-weight:700;
-      display:flex; align-items:center; gap:10px; user-select:none
+    .faq summary {
+      list-style: none;
+      padding: 18px 20px;
+      cursor: pointer;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      user-select: none;
     }
-    .faq summary::-webkit-details-marker{ display:none }
-    .faq-caret{
-      width:18px; height:18px; border:2px solid var(--fg-muted); border-left:0; border-top:0;
-      transform:rotate(45deg); transition:transform var(--fast) var(--ease), border-color var(--fast) var(--ease)
+    .faq summary::-webkit-details-marker {
+      display: none;
     }
-    details[open] > summary .faq-caret{ transform:rotate(-135deg); border-color:var(--acc1) }
+    .faq-caret {
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--fg-muted);
+      border-left: 0;
+      border-top: 0;
+      transform: rotate(45deg);
+      transition: transform var(--fast) var(--ease), border-color var(--fast) var(--ease);
+    }
+    details[open] > summary .faq-caret {
+      transform: rotate(-135deg);
+      border-color: var(--acc1);
+    }
 
-    .faq-body{
-      padding:0 20px 18px 46px; color:var(--fg-muted); line-height:1.6;
-      display:grid; grid-template-rows:1fr; opacity:1; /* visible by default */
-      transition:grid-template-rows var(--med) var(--ease), opacity var(--med) var(--ease)
+    .faq-body {
+      padding: 0 20px 18px 46px;
+      color: var(--fg-muted);
+      line-height: 1.6;
+      display: grid;
+      grid-template-rows: 1fr;
+      opacity: 1; /* visible by default */
+      transition: grid-template-rows var(--med) var(--ease), opacity var(--med) var(--ease);
     }
-    .faq-body > div{ overflow:hidden }
+    .faq-body > div {
+      overflow: hidden;
+    }
 
     /* CTA */
-    .contact-section{
-      margin-top:32px; padding:28px; border:1px solid var(--b); border-radius:16px;
-      background:linear-gradient(135deg,rgba(59,130,246,.08),rgba(16,185,129,.06))
+    .contact-section {
+      margin-top: 32px;
+      padding: 28px;
+      border: 1px solid var(--b);
+      border-radius: 16px;
+      background: linear-gradient(135deg,rgba(59,130,246,.08),rgba(16,185,129,.06));
     }
-    .contact-section h3{ margin:0 0 8px; font-size:1.35rem }
-    .contact-section p{ margin:0 0 10px; color:var(--fg-muted) }
+    .contact-section h3 {
+      margin: 0 0 8px;
+      font-size: 1.35rem;
+    }
+    .contact-section p {
+      margin: 0 0 10px;
+      color: var(--fg-muted);
+    }
     .contact-link {
-      display: inline-block; padding: 6px 12px; background: rgba(59, 130, 246, 0.1);
-      color: var(--acc1); text-decoration: none; border: 1px solid rgba(59, 130, 246, 0.2);
-      border-radius: 20px; font-size: 14px; font-weight: 500;
+      display: inline-block;
+      padding: 6px 12px;
+      background: rgba(59, 130, 246, 0.1);
+      color: var(--acc1);
+      text-decoration: none;
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 500;
     }
-    .contact-link:hover{ filter:brightness(1.1) }
+    .contact-link:hover {
+      filter: brightness(1.1);
+    }
 
     /* Layout */
-    body{ background:var(--bg); color:var(--fg) }
-    .section{ padding:80px 0 }
-    .container{ max-width:1200px; margin:0 auto; padding:0 20px }
+    body {
+      background: var(--bg);
+      color: var(--fg);
+    }
+    .section {
+      padding: 80px 0;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
   </style>
 </head>
 <body>
@@ -199,8 +279,6 @@
   <script src="/assets/js/app.js"></script>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Expand / collapse all
     const allDetails = Array.from(document.querySelectorAll('.faq details'));
     document.getElementById('faq-expand').addEventListener('click', () => allDetails.forEach(d => d.open = true));
     document.getElementById('faq-collapse').addEventListener('click', () => allDetails.forEach(d => d.open = false));
