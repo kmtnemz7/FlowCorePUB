@@ -51,10 +51,43 @@
     .solution-card:hover{transform:translateY(-6px);box-shadow:var(--elev-3);border-color:var(--acc1)}
     .solution-card[hidden]{display:none}
 
-    .card-header{padding:20px 20px 12px;background:linear-gradient(135deg,rgba(59,130,246,.08),rgba(16,185,129,.04))}
-    .solution-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--acc1);font-weight:800;margin-bottom:12px}
-    .solution-title{font-size:1.15rem;font-weight:800;margin:2px 0 6px}
-    .solution-subtitle{font-size:.8rem;color:var(--acc1);font-weight:700;text-transform:uppercase;letter-spacing:.4px}
+.card-header {
+  padding: 20px 20px 12px;
+  background: linear-gradient(135deg, rgba(59, 130, 246, .08), rgba(16, 185, 129, .04));
+  min-height: 96px; /* ensures space for subtitle and title */
+}
+
+.solution-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--acc1);
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.solution-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  margin: 2px 0 6px;
+}
+
+.solution-subtitle {
+  font-size: .8rem;
+  color: var(--acc1);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .4px;
+  display: block;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+  min-height: 1.2em; /* keeps line height consistent */
+}
+
 
     .card-content{padding:0 20px 18px}
     .solution-description{color:var(--fg-muted);margin-bottom:14px}
