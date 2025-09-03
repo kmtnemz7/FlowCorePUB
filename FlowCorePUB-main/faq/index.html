@@ -25,6 +25,24 @@
       --med:380ms;
     }
 
+    /* FAQ title panel (match CTA style) */
+    #faq .faq-hero{
+      margin:16px 0 24px;
+      padding:28px;
+      border:1px solid var(--b);
+      border-radius:16px;
+      background:linear-gradient(135deg,rgba(59,130,246,.08),rgba(16,185,129,.06));
+    }
+    #faq .faq-hero h2{
+      margin:0 0 8px;
+      font-size:clamp(1.8rem,3.2vw,2.4rem);
+      font-weight:800;
+    }
+    #faq .faq-hero p{
+      margin:0;
+      color:var(--fg-muted);
+    }
+
     /* Actions */
     .faq-toolbar {
       display: flex;
@@ -179,9 +197,9 @@
   <!-- FAQ -->
   <section class="section" id="faq" style="margin-top:80px;">
     <div class="container">
-      <div class="page-head">
-        <h2 class="page-title">FAQ</h2>
-        <p class="page-sub">Key info on outcomes, setup, security, support, pricing, and integrations.</p>
+      <div class="faq-hero">
+        <h2>FAQ</h2>
+        <p>Key info on outcomes, setup, security, support, pricing, and integrations.</p>
       </div>
 
       <div class="faq-toolbar">
