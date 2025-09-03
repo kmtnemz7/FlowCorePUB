@@ -12,138 +12,93 @@
   <link rel="stylesheet" href="/assets/css/style.css" />
   <style>
     :root {
-      --bg: #0b1220;
-      --bg-2: #1a2332;
-      --fg: #ffffff;
-      --fg-muted: #94a3b8;
-      --acc1: #3b82f6;
-      --acc2: #10b981;
-      --acc3: #f59e0b;
-      --acc4: #ef4444;
-      --b: #334155;
-      --ring: rgba(59, 130, 246, 0.2);
-      --motion-fast: 380ms;
-      --motion-med: 500ms;
-      --motion-slow: 1000ms;
-      --ease-standard: cubic-bezier(0.2, 0, 0, 1);
-      --ease-decel: cubic-bezier(0, 0, 0.2, 1);
-      --ease-spring-lite: cubic-bezier(0.4, 0, 0.2, 1);
-      --elev-1: 0 2px 8px rgba(0, 0, 0, 0.08);
-      --elev-2: 0 8px 24px rgba(0, 0, 0, 0.12);
-      --elev-3: 0 16px 48px rgba(0, 0, 0, 0.16);
+      --bg:#0b1220; --bg-2:#1a2332; --fg:#fff; --fg-muted:#94a3b8;
+      --acc1:#3b82f6; --acc2:#10b981; --acc3:#f59e0b; --acc4:#ef4444;
+      --b:#334155; --ring:rgba(59,130,246,.2);
+      --motion-fast:220ms; --motion-med:400ms;
+      --ease: cubic-bezier(.2,0,0,1);
+      --elev-1:0 2px 8px rgba(0,0,0,.08);
+      --elev-3:0 16px 48px rgba(0,0,0,.16);
     }
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: var(--bg);
-      color: var(--fg);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      padding: 40px 20px;
+    *{box-sizing:border-box}
+    body{background:var(--bg);color:var(--fg);line-height:1.6;-webkit-font-smoothing:antialiased}
+    .container{max-width:1200px;margin:0 auto;padding:40px 20px}
+    .section{padding:40px 0}
+
+    .solutions-header{text-align:center;margin-bottom:36px}
+    .solutions-header h2{
+      font-size:clamp(2rem,4vw,3rem);font-weight:700;margin-bottom:8px;
+      background:linear-gradient(135deg,var(--acc1),var(--acc2));
+      -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
     }
-    .container { max-width: 1200px; margin: 0 auto; }
-    .section { padding: 80px 0; }
+    .solutions-header p{color:var(--fg-muted);max-width:700px;margin:0 auto 20px}
 
-    .solutions-header { text-align:center; margin-bottom:60px; }
-    .solutions-header h2 {
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 700;
-      margin-bottom: 16px;
-      background: linear-gradient(135deg, var(--acc1), var(--acc2));
-      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    .category-tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:10px 0 24px}
+    .tab-button{
+      padding:10px 16px;border:1px solid var(--b);border-radius:24px;background:transparent;
+      color:var(--fg-muted);font-weight:600;font-size:14px;cursor:pointer;transition:all var(--motion-fast) var(--ease)
     }
-    .solutions-header p { color: var(--fg-muted); font-size:1.125rem; max-width:600px; margin:0 auto 32px; }
+    .tab-button:hover{border-color:var(--acc1);color:var(--acc1)}
+    .tab-button[aria-pressed="true"]{background:var(--acc1);border-color:var(--acc1);color:#fff;box-shadow:var(--elev-1)}
 
-    .category-tabs { display:flex; gap:8px; justify-content:center; margin-bottom:48px; flex-wrap:wrap; }
-    .tab-button {
-      padding:12px 20px; background:transparent; border:1px solid var(--b); border-radius:25px;
-      color:var(--fg-muted); font-weight:500; cursor:pointer; transition:all var(--motion-fast) var(--ease-standard); font-size:14px;
+    .solutions-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px}
+
+    .solution-card{
+      background:var(--bg-2);border:1px solid var(--b);border-radius:16px;overflow:hidden;position:relative;
+      transition:transform var(--motion-med) var(--ease),box-shadow var(--motion-med) var(--ease),border-color var(--motion-med) var(--ease);
+      transform:translateY(0)
     }
-    .tab-button:hover { border-color:var(--acc1); color:var(--acc1); transform:translateY(-1px); }
-    .tab-button.active { background:var(--acc1); border-color:var(--acc1); color:white; box-shadow:var(--elev-1); }
+    .solution-card:hover{transform:translateY(-6px);box-shadow:var(--elev-3);border-color:var(--acc1)}
+    .solution-card[hidden]{display:none}
 
-    .solutions-grid {
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap:24px; margin-bottom:48px;
+    .card-header{padding:20px 20px 12px;background:linear-gradient(135deg,rgba(59,130,246,.08),rgba(16,185,129,.04))}
+    .solution-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--acc1);font-weight:800;margin-bottom:12px}
+    .solution-title{font-size:1.15rem;font-weight:800;margin:2px 0 6px}
+    .solution-subtitle{font-size:.8rem;color:var(--acc1);font-weight:700;text-transform:uppercase;letter-spacing:.4px}
+
+    .card-content{padding:0 20px 18px}
+    .solution-description{color:var(--fg-muted);margin-bottom:14px}
+
+    .solution-features{max-height:0;overflow:hidden;transition:max-height var(--motion-med) var(--ease),opacity var(--motion-med) var(--ease);opacity:0}
+    .solution-card[aria-expanded="true"] .solution-features{max-height:320px;opacity:1;margin-bottom:12px}
+    .solution-features ul{list-style:none;display:grid;gap:8px;padding:0}
+    .solution-features li{display:flex;gap:8px;color:var(--fg-muted);font-size:.95rem}
+    .solution-features li:before{content:"✓";color:var(--acc2);font-weight:900}
+
+    .card-footer{padding:0 20px 18px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .complexity-badge{padding:4px 10px;border-radius:12px;font-size:.7rem;font-weight:800;text-transform:uppercase;white-space:nowrap}
+    .complexity-basic{background:rgba(16,185,129,.12);color:var(--acc2);border:1px solid rgba(16,185,129,.25)}
+    .complexity-intermediate{background:rgba(245,158,11,.12);color:var(--acc3);border:1px solid rgba(245,158,11,.25)}
+    .complexity-advanced{background:rgba(239,68,68,.12);color:var(--acc4);border:1px solid rgba(239,68,68,.25)}
+
+    .expand-button{background:none;border:none;color:var(--acc1);font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px}
+    .expand-button:focus-visible{outline:2px solid var(--acc1);outline-offset:2px}
+    .expand-icon{transition:transform var(--motion-fast) var(--ease)}
+    .solution-card[aria-expanded="true"] .expand-icon{transform:rotate(180deg)}
+
+    .contact-section{
+      text-align:center;padding:28px;background:linear-gradient(135deg,rgba(59,130,246,.08),rgba(16,185,129,.06));
+      border:1px solid var(--b);border-radius:16px;margin-top:28px
     }
+    .contact-link{color:var(--acc1);text-decoration:none;font-weight:800;padding:10px 18px;border:1px solid var(--acc1);border-radius:10px}
+    .contact-link:hover{background:var(--acc1);color:#fff}
 
-    .solution-card {
-      background:var(--bg-2); border:1px solid var(--b); border-radius:16px; overflow:hidden;
-      transition:all var(--motion-med) var(--ease-spring-lite); cursor:pointer; position:relative; opacity:1; transform:translateY(0);
+    @media (max-width:768px){
+      .container{padding:24px 16px}
+      .solutions-grid{grid-template-columns:1fr}
     }
-    .solution-card:hover { transform:translateY(-8px); box-shadow:var(--elev-3); border-color:var(--acc1); }
-    .solution-card.hidden { display: none; }
-    .solution-card.fade-out { opacity: 0; transform: translateY(20px); transition: opacity 0.2s ease, transform 0.2s ease; }
-
-    .card-header { position:relative; padding:24px 24px 16px; background:linear-gradient(135deg, rgba(59,130,246,.1), rgba(16,185,129,.05)); }
-    .solution-icon {
-      width:48px; height:48px; background:var(--acc1); border-radius:12px; display:flex; align-items:center; justify-content:center;
-      font-size:24px; margin-bottom:16px; box-shadow:var(--elev-1);
-    }
-    .solution-title { font-size:1.25rem; font-weight:700; margin-bottom:8px; color:var(--fg); }
-    .solution-subtitle { font-size:.875rem; color:var(--acc1); font-weight:600; text-transform:uppercase; letter-spacing:.5px; margin-bottom:12px; }
-
-    .card-content { padding:0 24px 24px; }
-    .solution-description { color:var(--fg-muted); margin-bottom:20px; line-height:1.6; }
-
-    .solution-features { display:none; opacity:0; max-height:0; overflow:hidden; transition:all var(--motion-med) var(--ease-spring-lite); }
-    .solution-card.expanded .solution-features { display:block; opacity:1; max-height:300px; margin-bottom:20px; }
-    .solution-features ul { list-style:none; display:grid; gap:8px; }
-    .solution-features li { display:flex; align-items:center; gap:8px; color:var(--fg-muted); font-size:.875rem; }
-    .solution-features li:before { content:'✓'; color:var(--acc2); font-weight:bold; width:16px; text-align:center; }
-
-    .card-footer { padding:0 24px 24px; display:flex; align-items:center; justify-content:space-between; }
-    .complexity-badge { padding:4px 12px; border-radius:12px; font-size:.75rem; font-weight:600; text-transform:uppercase; }
-    .complexity-basic { background:rgba(16,185,129,.1); color:var(--acc2); border:1px solid rgba(16,185,129,.2); }
-    .complexity-intermediate { background:rgba(245,158,11,.1); color:var(--acc3); border:1px solid rgba(245,158,11,.2); }
-    .complexity-advanced { background:rgba(239,68,68,.1); color:var(--acc4); border:1px solid rgba(239,68,68,.2); }
-
-    .expand-button {
-      background:none; border:none; color:var(--acc1); font-weight:500; cursor:pointer; display:flex; align-items:center; gap:4px;
-      transition:all var(--motion-fast) var(--ease-standard);
-    }
-    .expand-button:hover { color:var(--fg); }
-    .expand-icon { transition:transform var(--motion-fast) var(--ease-standard); }
-    .solution-card.expanded .expand-icon { transform:rotate(180deg); }
-
-    .contact-section {
-      text-align:center; padding:40px;
-      background:linear-gradient(135deg, rgba(59,130,246,.1), rgba(16,185,129,.05));
-      border:1px solid var(--b); border-radius:16px; margin-top:48px;
-    }
-    .contact-section h3 { font-size:1.5rem; font-weight:700; margin-bottom:12px; color:var(--fg); }
-    .contact-section p { color:var(--fg-muted); margin-bottom:24px; }
-    .contact-link {
-      color:var(--acc1); text-decoration:none; font-weight:600; padding:12px 24px; border:1px solid var(--acc1); border-radius:8px;
-      transition:all var(--motion-fast) var(--ease-standard); display:inline-block;
-    }
-    .contact-link:hover { background:var(--acc1); color:white; transform:translateY(-2px); box-shadow:var(--elev-1); }
-
-    @media (max-width: 768px) {
-      .solutions-grid { grid-template-columns:1fr; gap:16px; }
-      .category-tabs { gap:4px; }
-      .tab-button { padding:8px 16px; font-size:12px; }
-    }
-
-    @keyframes fadeInUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
-    .animate-in { animation: fadeInUp .6s var(--ease-spring-lite) forwards; }
   </style>
 </head>
 <body>
   <!-- Header -->
   <header class="header" id="top">
-    <div class="container nav">
-      <a class="brand" href="/" aria-label="FlowCore">
-        <span class="logo" aria-hidden="true">
-          <img src="assets/img/icon.png" alt="" width="28" height="28" />
-        </span>
+    <div class="container" style="padding-top:20px">
+      <a class="brand" href="/index.html" aria-label="FlowCore" style="display:inline-flex;align-items:center;gap:10px">
+        <span class="logo" aria-hidden="true"><img src="/assets/img/icon.png" alt="" width="28" height="28" /></span>
         <span>FlowCore</span>
       </a>
-      <input id="menu-toggle" type="checkbox" hidden aria-controls="menu" />
-      <label for="menu-toggle" class="burger" aria-label="Toggle Menu"><span></span></label>
-      <nav class="menu" id="menu">
-        <a href="/solutions">Solutions</a>
+      <nav class="menu" style="float:right;display:inline-flex;gap:18px">
+        <a href="/solutions" class="active">Solutions</a>
         <a href="/pricing">Pricing</a>
         <a href="/faq">FAQ</a>
         <a href="/contact">Contact</a>
@@ -155,112 +110,281 @@
     <div class="container">
       <div class="solutions-header">
         <h2>AI Solutions</h2>
-        <p>Comprehensive automation packages designed to drive measurable business outcomes. Start with one package, expand as you see ROI.</p>
-
-        <div class="category-tabs">
-          <button class="tab-button active" data-category="all">All Solutions</button>
-          <button class="tab-button" data-category="customer">Customer Service</button>
-          <button class="tab-button" data-category="sales">Sales & Marketing</button>
-          <button class="tab-button" data-category="operations">Operations</button>
+        <p>Pick a package. Prove ROI. Add more later.</p>
+        <div class="category-tabs" role="tablist" aria-label="Solution categories">
+          <button class="tab-button" role="tab" aria-pressed="true" data-category="all">All</button>
+          <button class="tab-button" role="tab" aria-pressed="false" data-category="customer">Customer Service</button>
+          <button class="tab-button" role="tab" aria-pressed="false" data-category="sales">Sales & Marketing</button>
+          <button class="tab-button" role="tab" aria-pressed="false" data-category="operations">Operations</button>
         </div>
       </div>
 
-      <div class="solutions-grid">
-        <!-- Your solution-card elements go here (unchanged) -->
-        <!-- Keep all cards as in your original -->
+      <div class="solutions-grid" id="grid">
+        <!-- CUSTOMER -->
+        <article class="solution-card" data-category="customer" aria-expanded="false">
+          <div class="card-header">
+            <div class="solution-icon" aria-hidden="true">☎︎</div>
+            <div class="solution-subtitle">Customer Service</div>
+            <h3 class="solution-title">AI Phone Receptionist</h3>
+          </div>
+          <div class="card-content">
+            <p class="solution-description">Answers calls, books appointments, collects details, and sends summaries to email or CRM.</p>
+            <div class="solution-features">
+              <ul>
+                <li>24/7 call handling</li>
+                <li>Calendar booking integrations</li>
+                <li>Call transcript and summary</li>
+                <li>Warm transfer to staff</li>
+              </ul>
+            </div>
+          </div>
+          <div class="card-footer">
+            <span class="complexity-badge complexity-intermediate">Intermediate</span>
+            <button class="expand-button" type="button"><span>Details</span><svg class="expand-icon" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2"/></svg></button>
+          </div>
+        </article>
+
+        <article class="solution-card" data-category="customer" aria-expanded="false">
+          <div class="card-header">
+            <div class="solution-icon" aria-hidden="true">💬</div>
+            <div class="solution-subtitle">Customer Service</div>
+            <h3 class="solution-title">Website Chatbot</h3>
+          </div>
+          <div class="card-content">
+            <p class="solution-description">Answers FAQs, routes leads, and hands off to humans when needed.</p>
+            <div class="solution-features">
+              <ul>
+                <li>Docs and FAQ ingestion</li>
+                <li>Lead capture with email</li>
+                <li>Escalation to team inbox</li>
+                <li>Analytics dashboard</li>
+              </ul>
+            </div>
+          </div>
+          <div class="card-footer">
+            <span class="complexity-badge complexity-basic">Basic</span>
+            <button class="expand-button" type="button"><span>Details</span><svg class="expand-icon" width="16" height="16" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" fill="none"/></svg></button>
+          </div>
+        </article>
+
+        <article class="solution-card" data-category="customer" aria-expanded="false">
+          <div class="card-header">
+            <div class="solution-icon" aria-hidden="true">📧</div>
+            <div class="solution-subtitle">Customer Service</div>
+            <h3 class="solution-title">Email Auto-Responder</h3>
+          </div>
+          <div class="card-content">
+            <p class="solution-description">Reads incoming emails and drafts accurate replies for approval or auto-send.</p>
+            <div class="solution-features">
+              <ul>
+                <li>Gmail and Outlook support</li>
+                <li>Policy-aware responses</li>
+                <li>Attachment handling</li>
+                <li>Human approval flow</li>
+              </ul>
+            </div>
+          </div>
+          <div class="card-footer">
+            <span class="complexity-badge complexity-basic">Basic</span>
+            <button class="expand-button" type="button"><span>Details</span><svg class="expand-icon" width="16" height="16" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" fill="none"/></svg></button>
+          </div>
+        </article>
+
+        <!-- SALES -->
+        <article class="solution-card" data-category="sales" aria-expanded="false">
+          <div class="card-header">
+            <div class="solution-icon" aria-hidden="true">🎯</div>
+            <div class="solution-subtitle">Sales & Marketing</div>
+            <h3 class="solution-title">Lead Qualifier</h3>
+          </div>
+          <div class="card-content">
+            <p class="solution-description">Captures and scores leads, books meetings, and syncs to CRM.</p>
+            <div class="solution-features">
+              <ul>
+                <li>Form and chat capture</li>
+                <li>Calendar booking links</li>
+                <li>HubSpot and Pipedrive</li>
+                <li>Follow-up sequences</li>
+              </ul>
+            </div>
+          </div>
+          <div class="card-footer">
+            <span class="complexity-badge complexity-intermediate">Intermediate</span>
+            <button class="expand-button" type="button"><span>Details</span><svg class="expand-icon" width="16" height="16" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" fill="none"/></svg></button>
+          </div>
+        </article>
+
+        <article class="solution-card" data-category="sales" aria-expanded="false">
+          <div class="card-header">
+            <div class="solution-icon" aria-hidden="true">⭐</div>
+            <div class="solution-subtitle">Sales & Marketing</div>
+            <h3 class="solution-title">Review Booster</h3>
+          </div>
+          <div class="card-content">
+            <p class="solution-description">Requests reviews at the right time and routes unhappy clients to support.</p>
+            <div class="solution-features">
+              <ul>
+                <li>SMS and email asks</li>
+                <li>Google and Facebook</li>
+                <li>Sentiment filter</li>
+                <li>Automated reminders</li>
+              </ul>
+            </div>
+          </div>
+          <div class="card-footer">
+            <span class="complexity-badge complexity-basic">Basic</span>
+            <button class="expand-button" type="button"><span>Details</span><svg class="expand-icon" width="16" height="16" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" fill="none"/></svg></button>
+          </div>
+        </article>
+
+        <article class="solution-card" data-category="sales" aria-expanded="false">
+          <div class="card-header">
+            <div class="solution-icon" aria-hidden="true">📝</div>
+            <div class="solution-subtitle">Sales & Marketing</div>
+            <h3 class="solution-title">Content Repurposer</h3>
+          </div>
+          <div class="card-content">
+            <p class="solution-description">Turns calls and webinars into posts, emails, and shorts.</p>
+            <div class="solution-features">
+              <ul>
+                <li>Speaker diarization</li>
+                <li>Social post generator</li>
+                <li>Newsletter drafts</li>
+                <li>Brand style memory</li>
+              </ul>
+            </div>
+          </div>
+          <div class="card-footer">
+            <span class="complexity-badge complexity-intermediate">Intermediate</span>
+            <button class="expand-button" type="button"><span>Details</span><svg class="expand-icon" width="16" height="16" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" fill="none"/></svg></button>
+          </div>
+        </article>
+
+        <!-- OPERATIONS -->
+        <article class="solution-card" data-category="operations" aria-expanded="false">
+          <div class="card-header">
+            <div class="solution-icon" aria-hidden="true">📅</div>
+            <div class="solution-subtitle">Operations</div>
+            <h3 class="solution-title">Appointment Scheduler</h3>
+          </div>
+          <div class="card-content">
+            <p class="solution-description">Books and confirms appointments across phone, chat, and web.</p>
+            <div class="solution-features">
+              <ul>
+                <li>Two-way SMS confirms</li>
+                <li>No-show reduction</li>
+                <li>Staff calendar sync</li>
+                <li>Payments on booking</li>
+              </ul>
+            </div>
+          </div>
+          <div class="card-footer">
+            <span class="complexity-badge complexity-intermediate">Intermediate</span>
+            <button class="expand-button" type="button"><span>Details</span><svg class="expand-icon" width="16" height="16" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" fill="none"/></svg></button>
+          </div>
+        </article>
+
+        <article class="solution-card" data-category="operations" aria-expanded="false">
+          <div class="card-header">
+            <div class="solution-icon" aria-hidden="true">🧾</div>
+            <div class="solution-subtitle">Operations</div>
+            <h3 class="solution-title">Voice-to-CRM Notes</h3>
+          </div>
+          <div class="card-content">
+            <p class="solution-description">Turns phone calls into structured CRM notes with tasks and next steps.</p>
+            <div class="solution-features">
+              <ul>
+                <li>Auto summaries</li>
+                <li>Task extraction</li>
+                <li>Owner assignment</li>
+                <li>Compliance logging</li>
+              </ul>
+            </div>
+          </div>
+          <div class="card-footer">
+            <span class="complexity-badge complexity-basic">Basic</span>
+            <button class="expand-button" type="button"><span>Details</span><svg class="expand-icon" width="16" height="16" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" fill="none"/></svg></button>
+          </div>
+        </article>
+
+        <article class="solution-card" data-category="operations" aria-expanded="false">
+          <div class="card-header">
+            <div class="solution-icon" aria-hidden="true">📦</div>
+            <div class="solution-subtitle">Operations</div>
+            <h3 class="solution-title">Inventory Reorder Assistant</h3>
+          </div>
+          <div class="card-content">
+            <p class="solution-description">Predicts stockouts and drafts purchase orders for approval.</p>
+            <div class="solution-features">
+              <ul>
+                <li>Threshold alerts</li>
+                <li>Supplier templates</li>
+                <li>Multi-location aware</li>
+                <li>Weekly reports</li>
+              </ul>
+            </div>
+          </div>
+          <div class="card-footer">
+            <span class="complexity-badge complexity-advanced">Advanced</span>
+            <button class="expand-button" type="button"><span>Details</span><svg class="expand-icon" width="16" height="16" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" fill="none"/></svg></button>
+          </div>
+        </article>
       </div>
 
       <div class="contact-section">
-        <h3>Need Something Custom?</h3>
-        <p>These solutions are highly flexible and customizable. If you're not sure we can create what you need, we'd love to discuss your requirements.</p>
-        <a href="mailto:support@flowcore.systems" class="contact-link">Get in Touch</a>
+        <h3>Need something custom</h3>
+        <p>These are flexible. If you are not sure we can build what you need, ask.</p>
+        <a href="mailto:support@flowcore.systems" class="contact-link">Get in touch</a>
       </div>
     </div>
   </section>
 
-  <script>
-    const tabButtons = document.querySelectorAll('.tab-button');
-    const solutionCards = Array.from(document.querySelectorAll('.solution-card'));
-
-    tabButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        // Update active tab
-        tabButtons.forEach(btn => btn.classList.remove('active'));
-        button.classList.add('active');
-
-        const category = button.dataset.category;
-
-        // Sort so matching ones go to top
-        const sortedCards = [...solutionCards].sort((a, b) => {
-          const aMatch = category === 'all' || a.dataset.category === category;
-          const bMatch = category === 'all' || b.dataset.category === category;
-          return bMatch - aMatch;
-        });
-
-        const container = document.querySelector('.solutions-grid');
-        sortedCards.forEach(card => container.appendChild(card));
-
-        // Fade out non-matching, fade in matching
-        sortedCards.forEach(card => {
-          const isMatch = category === 'all' || card.dataset.category === category;
-          if (isMatch) {
-            card.style.display = 'block';
-            requestAnimationFrame(() => {
-              card.classList.remove('hidden');
-              card.classList.add('animate-in');
-            });
-          } else {
-            card.classList.remove('animate-in');
-            card.classList.add('fade-out');
-            setTimeout(() => {
-              card.classList.add('hidden');
-              card.style.display = 'none';
-              card.classList.remove('fade-out');
-            }, 200);
-          }
-        });
-      });
-    });
-
-    // Expand/collapse
-    document.querySelector('.solutions-grid').addEventListener('click', (e) => {
-      const expandBtn = e.target.closest('.expand-button');
-      const card = e.target.closest('.solution-card');
-      if (!card) return;
-
-      if (expandBtn) {
-        e.stopPropagation();
-        card.classList.toggle('expanded');
-        expandBtn.firstChild.textContent = card.classList.contains('expanded') ? 'Less ' : 'Details ';
-      } else {
-        card.classList.toggle('expanded');
-        const btn = card.querySelector('.expand-button');
-        if (btn) btn.firstChild.textContent = card.classList.contains('expanded') ? 'Less ' : 'Details ';
-      }
-    });
-
-    // Initial animation
-    setTimeout(() => {
-      solutionCards.forEach((card, index) => {
-        setTimeout(() => card.classList.add('animate-in'), index * 100);
-      });
-    }, 200);
-  </script>
-
-  <!-- Footer -->
   <footer class="footer">
     <div class="container footer-inner">
       <div class="footer-brand">FlowCore · AI Automations</div>
       <nav class="footer-links">
-        <a href="/solutions">Solutions</a>
-        <a href="/pricing">Pricing</a>
-        <a href="/faq">FAQ</a>
-        <a href="/contact">Contact</a>
+        <a href="/solutions.html">Solutions</a>
+        <a href="/pricing.html">Pricing</a>
+        <a href="/faq.html">FAQ</a>
+        <a href="/contact.html">Contact</a>
       </nav>
       <div class="footer-copy">© <span id="year"></span> FlowCore</div>
     </div>
   </footer>
 
-  <script src="assets/js/app.js"></script>
+  <script>
+    // year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // tabs
+    const tabs = document.querySelectorAll('.tab-button');
+    const cards = document.querySelectorAll('.solution-card');
+
+    function setCategory(cat){
+      tabs.forEach(t => t.setAttribute('aria-pressed', String(t.dataset.category === cat)));
+      cards.forEach(c => {
+        const match = (cat === 'all') || (c.dataset.category === cat);
+        if (match) c.hidden = false; else c.hidden = true;
+      });
+    }
+
+    tabs.forEach(t => t.addEventListener('click', () => setCategory(t.dataset.category)));
+    setCategory('all'); // visible by default
+
+    // expand/collapse with delegation
+    document.getElementById('grid').addEventListener('click', (e) => {
+      const btn = e.target.closest('.expand-button');
+      const card = e.target.closest('.solution-card');
+      if (!card) return;
+      if (btn || !e.target.closest('.card-footer')) {
+        const expanded = card.getAttribute('aria-expanded') === 'true';
+        card.setAttribute('aria-expanded', String(!expanded));
+        const label = card.querySelector('.expand-button span');
+        if (label) label.textContent = expanded ? 'Details' : 'Less';
+      }
+    });
+  </script>
+
+  <script src="/assets/js/app.js"></script>
 </body>
 </html>
