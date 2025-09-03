@@ -10,6 +10,105 @@
   <link rel="icon" href="/assets/img/icon.png" />
   <link rel="apple-touch-icon" href="/assets/img/icon-192.png" />
   <link rel="stylesheet" href="/assets/css/style.css" />
+  <style>
+    /* FAQ-specific styles */
+    .faq-toolbar {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: center;
+      margin: 12px 0 28px;
+      flex-wrap: wrap;
+    }
+    #faq-search {
+      width: min(720px, 100%);
+      background: var(--bg-2);
+      color: var(--fg);
+      border: 1px solid var(--b);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 16px;
+      outline: none;
+      transition: box-shadow var(--motion-fast) var(--ease-standard), border-color var(--motion-fast) var(--ease-standard);
+    }
+    #faq-search:focus {
+      border-color: var(--acc1);
+      box-shadow: 0 0 0 3px var(--ring);
+    }
+    .faq-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .btn-small {
+      font-size: 14px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--b);
+      background: transparent;
+      color: var(--fg);
+      cursor: pointer;
+      transition: all var(--motion-fast) var(--ease-standard);
+    }
+    .btn-small:hover { border-color: var(--acc1); color: var(--acc1); transform: translateY(-1px); }
+
+    /* Details/summary look */
+    .faq details {
+      background: var(--bg-2);
+      border: 1px solid var(--b);
+      border-radius: 10px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      transition: border-color var(--motion-fast) var(--ease-standard), box-shadow var(--motion-fast) var(--ease-standard);
+    }
+    .faq details[open] { border-color: var(--acc1); box-shadow: var(--elev-1); }
+
+    .faq summary {
+      list-style: none;
+      padding: 18px 20px;
+      cursor: pointer;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      user-select: none;
+    }
+    .faq summary::-webkit-details-marker { display: none; }
+
+    .faq-caret {
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--fg-muted);
+      border-left: 0;
+      border-top: 0;
+      transform: rotate(45deg);
+      transition: transform var(--motion-fast) var(--ease-standard), border-color var(--motion-fast) var(--ease-standard);
+    }
+    details[open] > summary .faq-caret { transform: rotate(-135deg); border-color: var(--acc1); }
+
+    .faq-body {
+      padding: 0 20px 18px 46px;
+      color: var(--fg-muted);
+      line-height: 1.6;
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows var(--motion-med) var(--ease-decel), opacity var(--motion-med) var(--ease-decel);
+      opacity: 0;
+    }
+    details[open] .faq-body { grid-template-rows: 1fr; opacity: 1; }
+    .faq-body > div { overflow: hidden; }
+
+    /* Search highlight */
+    mark.faq-hit {
+      background: rgba(59,130,246,0.25);
+      color: inherit;
+      padding: 0 2px;
+      border-radius: 3px;
+    }
+
+    /* Hide when filtered out */
+    .faq details[data-hidden="true"] { display: none; }
+  </style>
 </head>
 <body>
   <!-- Header -->
@@ -38,50 +137,76 @@
       <h2>FAQ</h2>
       <p class="muted maxw">Key info on outcomes, setup, security, support, pricing, and integrations.</p>
 
+      <!-- Toolbar: search + actions -->
+      <div class="faq-toolbar">
+        <input id="faq-search" type="search" placeholder="Search questions… (e.g. pricing, security, calendar)" aria-label="Search FAQ" />
+        <div class="faq-actions">
+          <button class="btn-small" id="faq-expand">Expand all</button>
+          <button class="btn-small" id="faq-collapse">Collapse all</button>
+          <button class="btn-small" id="faq-clear">Clear search</button>
+        </div>
+      </div>
+
       <div class="grid2">
         <!-- Column 1 -->
-        <div class="faq">
-          <details open data-animate="tile">
-            <summary>What outcomes do you focus on?</summary>
-            <p>Faster first response, higher booking rate, and fewer no-shows. We track and report these weekly.</p>
+        <div class="faq" data-faq-col="1">
+          <details id="faq-outcomes" data-animate="tile" open>
+            <summary><span class="faq-caret"></span>What outcomes do you focus on?</summary>
+            <div class="faq-body"><div>
+              Faster first response, higher booking rate, and fewer no-shows. We track and report these weekly.
+            </div></div>
           </details>
 
-          <details data-animate="tile">
-            <summary>How long does setup take?</summary>
-            <p>A standard build ships in 7 days including discovery, build, QA, and go-live.</p>
+          <details id="faq-setup" data-animate="tile">
+            <summary><span class="faq-caret"></span>How long does setup take?</summary>
+            <div class="faq-body"><div>
+              A standard build ships in 7 days including discovery, build, QA, and go-live.
+            </div></div>
           </details>
 
-          <details data-animate="tile">
-            <summary>What do you need from us to start?</summary>
-            <p>Access to calendars/booking tools, messaging channels (email/SMS), and basic copy or brand tone. We follow least-privilege access.</p>
+          <details id="faq-requirements" data-animate="tile">
+            <summary><span class="faq-caret"></span>What do you need from us to start?</summary>
+            <div class="faq-body"><div>
+              Access to calendars/booking tools, messaging channels (email/SMS), and basic copy or brand tone. We follow least-privilege access.
+            </div></div>
           </details>
 
-          <details data-animate="tile">
-            <summary>Can we keep a human in the loop?</summary>
-            <p>Yes. You can start in “draft then approve” mode, then graduate to auto-send with guardrails per channel or intent.</p>
+          <details id="faq-human-loop" data-animate="tile">
+            <summary><span class="faq-caret"></span>Can we keep a human in the loop?</summary>
+            <div class="faq-body"><div>
+              Yes. Start in “draft then approve” mode, then graduate to auto-send with guardrails per channel or intent.
+            </div></div>
           </details>
         </div>
 
         <!-- Column 2 -->
-        <div class="faq">
-          <details data-animate="tile">
-            <summary>Is it secure?</summary>
-            <p>Yes. We use least-privilege access, store keys in vaults, minimize PII, and remove access at offboarding. Audit logs available on request.</p>
+        <div class="faq" data-faq-col="2">
+          <details id="faq-security" data-animate="tile">
+            <summary><span class="faq-caret"></span>Is it secure?</summary>
+            <div class="faq-body"><div>
+              Yes. We use least-privilege access, store keys in vaults, minimize PII, and remove access at offboarding. Audit logs available on request.
+            </div></div>
           </details>
 
-          <details data-animate="tile">
-            <summary>What support do we get?</summary>
-            <p>Monitoring, error alerts, monthly KPI reports, and small change requests under the Care Plan.</p>
+          <details id="faq-support" data-animate="tile">
+            <summary><span class="faq-caret"></span>What support do we get?</summary>
+            <div class="faq-body"><div>
+              Monitoring, error alerts, monthly KPI reports, and small change requests under the Care Plan.
+            </div></div>
           </details>
 
-          <details data-animate="tile">
-            <summary>How is pricing structured?</summary>
-            <p>Fixed implementation plus a monthly Care Plan. See <a href="/pricing">Pricing</a> for current tiers.</p>
+          <details id="faq-pricing" data-animate="tile">
+            <summary><span class="faq-caret"></span>How is pricing structured?</summary>
+            <div class="faq-body"><div>
+              Fixed implementation plus a monthly Care Plan. See <a href="/pricing">Pricing</a> for current tiers.
+            </div></div>
           </details>
 
-          <details data-animate="tile">
-            <summary>Which tools do you integrate with?</summary>
-            <p>Commonly Google Calendar, Outlook, Stripe, PayPal, HubSpot, Salesforce, Facebook, and website chat. Ask about others.</p>
+          <details id="faq-integrations" data-animate="tile">
+            <summary><span class="faq-caret"></span>Which tools do you integrate with?</summary>
+            <div class="faq-body"><div>
+              Commonly Google Calendar, Outlook, Stripe, PayPal, HubSpot, Salesforce, Facebook, and website chat. Ask about others.
+            </div></div>
           </details>
         </div>
       </div>
@@ -95,21 +220,141 @@
     </div>
   </section>
 
- <!-- Footer -->
-<footer class="footer">
-  <div class="container footer-inner">
-    <div class="footer-brand">FlowCore · AI Automations</div>
-    <nav class="footer-links">
-      <a href="/solutions">Solutions</a>
-      <a href="/pricing">Pricing</a>
-      <a href="/faq">FAQ</a>
-      <a href="/contact">Contact</a>
-    </nav>
-    <div class="footer-copy">© <span id="year"></span> FlowCore</div>
-  </div>
-</footer>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">FlowCore · AI Automations</div>
+      <nav class="footer-links">
+        <a href="/solutions">Solutions</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/faq">FAQ</a>
+        <a href="/contact">Contact</a>
+      </nav>
+      <div class="footer-copy">© <span id="year"></span> FlowCore</div>
+    </div>
+  </footer>
 
-<script src="assets/js/app.js"></script>
+  <script src="/assets/js/app.js"></script>
+  <script>
+    // Single-open-per-column accordion
+    document.querySelectorAll('.faq').forEach(col => {
+      const items = Array.from(col.querySelectorAll('details'));
+      items.forEach(d => {
+        d.querySelector('summary')?.addEventListener('click', (e) => {
+          // native toggling happens after click; delay to read state
+          setTimeout(() => {
+            if (d.open) {
+              items.forEach(o => { if (o !== d) o.open = false; });
+              history.replaceState(null, '', '#' + d.id);
+            } else if (location.hash.slice(1) === d.id) {
+              history.replaceState(null, '', location.pathname); // remove hash if closing current
+            }
+          }, 0);
+        });
+      });
+    });
+
+    // Deep-linking: open item from hash
+    function openFromHash() {
+      const id = location.hash.slice(1);
+      if (!id) return;
+      const el = document.getElementById(id);
+      if (el && el.tagName.toLowerCase() === 'details') {
+        // close siblings in same column
+        const col = el.closest('.faq');
+        col?.querySelectorAll('details').forEach(o => { if (o !== el) o.open = false; });
+        el.open = true;
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+    window.addEventListener('hashchange', openFromHash);
+    openFromHash();
+
+    // Search, highlight, expand/collapse controls
+    const searchInput = document.getElementById('faq-search');
+    const btnExpand = document.getElementById('faq-expand');
+    const btnCollapse = document.getElementById('faq-collapse');
+    const btnClear = document.getElementById('faq-clear');
+
+    const allDetails = Array.from(document.querySelectorAll('.faq details'));
+
+    function clearHighlights(root) {
+      root.querySelectorAll('mark.faq-hit').forEach(m => {
+        const text = document.createTextNode(m.textContent);
+        m.replaceWith(text);
+      });
+    }
+
+    function highlight(text, q) {
+      if (!q) return text;
+      const re = new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig');
+      return text.replace(re, '<mark class="faq-hit">$1</mark>');
+    }
+
+    function filterFAQ(q) {
+      const term = q.trim().toLowerCase();
+      let firstShown = null;
+
+      allDetails.forEach(d => {
+        d.removeAttribute('data-hidden');
+        // clear previous marks
+        clearHighlights(d);
+
+        const summaryEl = d.querySelector('summary');
+        const bodyEl = d.querySelector('.faq-body');
+
+        const sumText = summaryEl ? summaryEl.textContent : '';
+        const bodyText = bodyEl ? bodyEl.textContent : '';
+
+        if (!term || sumText.toLowerCase().includes(term) || bodyText.toLowerCase().includes(term)) {
+          // show
+          d.removeAttribute('data-hidden');
+
+          // add highlights
+          if (term) {
+            if (summaryEl) {
+              const raw = summaryEl.innerText.replace(/^\s+|\s+$/g, '');
+              summaryEl.innerHTML = '<span class="faq-caret"></span>' + highlight(raw, term);
+            }
+            if (bodyEl) {
+              const rawBody = bodyEl.innerText;
+              bodyEl.innerHTML = '<div>' + highlight(rawBody, term) + '</div>';
+            }
+          }
+
+          if (!firstShown) firstShown = d;
+        } else {
+          // hide
+          d.setAttribute('data-hidden', 'true');
+          d.open = false;
+        }
+      });
+
+      // Open the first visible match for quick preview
+      if (firstShown) {
+        const col = firstShown.closest('.faq');
+        col?.querySelectorAll('details').forEach(o => { if (o !== firstShown) o.open = false; });
+        firstShown.open = true;
+      }
+    }
+
+    searchInput.addEventListener('input', (e) => filterFAQ(e.target.value));
+    btnClear.addEventListener('click', () => {
+      searchInput.value = '';
+      filterFAQ('');
+      history.replaceState(null, '', location.pathname);
+    });
+
+    btnExpand.addEventListener('click', () => {
+      const visible = allDetails.filter(d => !d.hasAttribute('data-hidden'));
+      // expand per column but keep usability: allow multiple open when expanding all
+      visible.forEach(d => d.open = true);
+    });
+
+    btnCollapse.addEventListener('click', () => {
+      allDetails.forEach(d => d.open = false);
+      history.replaceState(null, '', location.pathname);
+    });
+  </script>
 </body>
 </html>
-
