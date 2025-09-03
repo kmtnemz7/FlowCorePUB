@@ -434,3 +434,56 @@ input:focus-visible {
 .solution-card.expanded .expand-icon {
   transform: rotate(180deg);
 }
+.footer {
+  background: var(--bg-2);
+  border-top: 1px solid var(--b);
+  padding: 20px 0;
+  position: relative;
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.footer-brand {
+  font-weight: 600;
+  color: var(--fg);
+}
+
+.footer-links {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-links a {
+  color: var(--fg-muted);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color var(--motion-fast) var(--ease-standard);
+}
+
+.footer-links a:hover {
+  color: var(--acc1);
+}
+
+.footer-copy {
+  font-size: 0.85rem;
+  color: var(--fg-muted);
+}
+
+/* Keep footer at bottom if page content is short */
+html, body {
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+}
+.footer {
+  margin-top: auto;
+}
+
