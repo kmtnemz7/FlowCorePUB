@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Solutions — FlowCore</title>
+  <meta name="description" content="Explore FlowCore's AI automation solutions for customer service, sales, marketing, and operations." />
+  <meta name="theme-color" content="#0b1220" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" href="/assets/img/icon.png" />
+  <link rel="apple-touch-icon" href="/assets/img/icon-192.png" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
+  <style>
+    :root {
+      --bg: #0b1220;
+      --bg-2: #1a2332;
+      --fg: #ffffff;
+      --fg-muted: #94a3b8;
+      --acc1: #3b82f6;
+      --acc2: #10b981;
+      --acc3: #f59e0b;
+      --acc4: #ef4444;
+      --b: #334155;
+      --ring: rgba(59, 130, 246, 0.2);
+      --motion-fast: 380ms;
+      --motion-med: 500ms;
+      --motion-slow: 1000ms;
+      --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+      --ease-decel: cubic-bezier(0, 0, 0.2, 1);
+      --ease-spring-lite: cubic-bezier(0.4, 0, 0.2, 1);
+      --elev-1: 0 2px 8px rgba(0, 0, 0, 0.08);
+      --elev-2: 0 8px 24px rgba(0, 0, 0, 0.12);
+      --elev-3: 0 16px 48px rgba(0, 0, 0, 0.16);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      padding: 40px 20px;
+    }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .section { padding: 80px 0; }
+
+    .solutions-header { text-align:center; margin-bottom:60px; }
+    .solutions-header h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--acc1), var(--acc2));
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .solutions-header p { color: var(--fg-muted); font-size:1.125rem; max-width:600px; margin:0 auto 32px; }
+
+    .category-tabs { display:flex; gap:8px; justify-content:center; margin-bottom:48px; flex-wrap:wrap; }
+    .tab-button {
+      padding:12px 20px; background:transparent; border:1px solid var(--b); border-radius:25px;
+      color:var(--fg-muted); font-weight:500; cursor:pointer; transition:all var(--motion-fast) var(--ease-standard); font-size:14px;
+    }
+    .tab-button:hover { border-color:var(--acc1); color:var(--acc1); transform:translateY(-1px); }
+    .tab-button.active { background:var(--acc1); border-color:var(--acc1); color:white; box-shadow:var(--elev-1); }
+
+    .solutions-grid {
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap:24px; margin-bottom:48px;
+    }
+
+    .solution-card {
+      background:var(--bg-2); border:1px solid var(--b); border-radius:16px; overflow:hidden;
+      transition:all var(--motion-med) var(--ease-spring-lite); cursor:pointer; position:relative; opacity:1; transform:translateY(0);
+    }
+    .solution-card:hover { transform:translateY(-8px); box-shadow:var(--elev-3); border-color:var(--acc1); }
+    .solution-card.hidden { opacity:0; transform:translateY(20px); pointer-events:none; }
+
+    .card-header { position:relative; padding:24px 24px 16px; background:linear-gradient(135deg, rgba(59,130,246,.1), rgba(16,185,129,.05)); }
+    .solution-icon {
+      width:48px; height:48px; background:var(--acc1); border-radius:12px; display:flex; align-items:center; justify-content:center;
+      font-size:24px; margin-bottom:16px; box-shadow:var(--elev-1);
+    }
+    .solution-title { font-size:1.25rem; font-weight:700; margin-bottom:8px; color:var(--fg); }
+    .solution-subtitle { font-size:.875rem; color:var(--acc1); font-weight:600; text-transform:uppercase; letter-spacing:.5px; margin-bottom:12px; }
+
+    .card-content { padding:0 24px 24px; }
+    .solution-description { color:var(--fg-muted); margin-bottom:20px; line-height:1.6; }
+
+    .solution-features { display:none; opacity:0; max-height:0; overflow:hidden; transition:all var(--motion-med) var(--ease-spring-lite); }
+    .solution-card.expanded .solution-features { display:block; opacity:1; max-height:300px; margin-bottom:20px; }
+    .solution-features ul { list-style:none; display:grid; gap:8px; }
+    .solution-features li { display:flex; align-items:center; gap:8px; color:var(--fg-muted); font-size:.875rem; }
+    .solution-features li:before { content:'✓'; color:var(--acc2); font-weight:bold; width:16px; text-align:center; }
+
+    .card-footer { padding:0 24px 24px; display:flex; align-items:center; justify-content:space-between; }
+    .complexity-badge { padding:4px 12px; border-radius:12px; font-size:.75rem; font-weight:600; text-transform:uppercase; }
+    .complexity-basic { background:rgba(16,185,129,.1); color:var(--acc2); border:1px solid rgba(16,185,129,.2); }
+    .complexity-intermediate { background:rgba(245,158,11,.1); color:var(--acc3); border:1px solid rgba(245,158,11,.2); }
+    .complexity-advanced { background:rgba(239,68,68,.1); color:var(--acc4); border:1px solid rgba(239,68,68,.2); }
+
+    .expand-button {
+      background:none; border:none; color:var(--acc1); font-weight:500; cursor:pointer; display:flex; align-items:center; gap:4px;
+      transition:all var(--motion-fast) var(--ease-standard);
+    }
+    .expand-button:hover { color:var(--fg); }
+    .expand-icon { transition:transform var(--motion-fast) var(--ease-standard); }
+    .solution-card.expanded .expand-icon { transform:rotate(180deg); }
+
+    .contact-section {
+      text-align:center; padding:40px;
+      background:linear-gradient(135deg, rgba(59,130,246,.1), rgba(16,185,129,.05));
+      border:1px solid var(--b); border-radius:16px; margin-top:48px;
+    }
+    .contact-section h3 { font-size:1.5rem; font-weight:700; margin-bottom:12px; color:var(--fg); }
+    .contact-section p { color:var(--fg-muted); margin-bottom:24px; }
+    .contact-link {
+      color:var(--acc1); text-decoration:none; font-weight:600; padding:12px 24px; border:1px solid var(--acc1); border-radius:8px;
+      transition:all var(--motion-fast) var(--ease-standard); display:inline-block;
+    }
+    .contact-link:hover { background:var(--acc1); color:white; transform:translateY(-2px); box-shadow:var(--elev-1); }
+
+    @media (max-width: 768px) {
+      .solutions-grid { grid-template-columns:1fr; gap:16px; }
+      .category-tabs { gap:4px; }
+      .tab-button { padding:8px 16px; font-size:12px; }
+    }
+
+    @keyframes fadeInUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+    .animate-in { animation: fadeInUp .6s var(--ease-spring-lite) forwards; }
+  </style>
+</head>
+<body>
+  <section class="section" id="solutions">
+    <div class="container">
+      <div class="solutions-header">
+        <h2>AI Solutions</h2>
+        <p>Comprehensive automation packages designed to drive measurable business outcomes. Start with one package, expand as you see ROI.</p>
+
+        <div class="category-tabs">
+          <button class="tab-button active" data-category="all">All Solutions</button>
+          <button class="tab-button" data-category="customer">Customer Service</button>
+          <button class="tab-button" data-category="sales">Sales & Marketing</button>
+          <button class="tab-button" data-category="operations">Operations</button>
+        </div>
+      </div>
+
+      <div class="solutions-grid">
+        <!-- Customer -->
+        <div class="solution-card" data-category="customer">
+          <div class="card-header">
+            <div class="solution-icon">📅</div>
+            <div class="solution-subtitle">Customer Service</div>
+            <h3 class="solution-title">Automated Appointment Booking</h3>
+          </div>
+          <div class="card-content">
+            <p class="solution-description">AI integrates with Google Calendar to allow seamless online scheduling with automatic SMS/email confirmations and smart reminders that reduce no-shows by up to 60%.</p>
+            <div class="solution-features">
+              <ul>
+                <li>Google Calendar & Outlook integration</li>
+                <li>Automated SMS/email reminders</li>
+                <li>Reschedule link generation</li>
+                <li>No-show reduction analytics</li>
+                <li>Multi-timezone support</li>
+              </ul>
+            </div>
+          </div>
+          <div class="card-footer">
+            <span class="complexity-badge complexity-basic">Basic</span>
+            <button class="expand-button">Details <span class="expand-icon">▼</span></button>
+          </div>
+        </div>
+
+        <div class="solution-card" data-category="customer">
+          <div class="card-header">
+            <div class="solution-icon">🤖</div>
+            <div class="solution-subtitle">Customer Service</div>
+            <h3 class="solution-title">24/7 AI Customer Support</h3>
+          </div>
+          <div class="card-content">
+            <p class="solution-description">Intelligent chatbot for website and social media that answers FAQs, books appointments, and routes complex queries to staff. Available 24/7 without additional staffing costs.</p>
+            <div class="solution-features">
+              <ul>
+                <li>24/7 FAQ responses with learning</li>
+                <li>Direct appointment booking</li>
+                <li>Smart query routing to staff</li>
+                <li>Facebook & website integration</li>
+                <li>Multilingual support</li>
+              </ul>
+            </div>
+          </div>
+          <div class="card-footer">
+            <span class="complexity-badge complexity-intermediate">Intermediate</span>
+            <button class="expand-button">Details <span class="expand-icon">▼</span></button>
+          </div>
+        </div>
+
+        <div class="solution-card" data-category="customer">
+          <div class="card-header">
+            <div class="solution-icon">📞</div>
+            <div class="solution-subtitle">Customer Service</div>
+            <h3 class="solution-title">AI Voice Receptionist</h3>
+          </div>
+          <div class="card-content">
+            <p class="solution-description">AI-powered phone assistant that answers calls, provides business information, books appointments, and intelligently routes calls. Includes after-hours support and spam filtering.</p>
+            <div class="solution-features">
+              <ul>
+                <li>Natural voice interactions</li>
+                <li>Appointment booking over phone</li>
+                <li>Intelligent call routing</li>
+                <li>After-hours call handling</li>
+                <li>Spam call filtering</li>
+              </ul>
+            </div>
+          </div>
+          <div class="card-footer">
+            <span class="complexity-badge complexity-advanced">Advanced</span>
+            <button class="expand-button">Details <span class="expand-icon">▼</span></button>
+          </div>
+        </div>
+
+        <!-- Sales & Marketing -->
+        <div class="solution-card" data-category="sales">
+          <div class="card-header">
+            <div class="solution-icon">🎯</div>
+            <div class="solution-subtitle">Sales & Marketing</div>
+            <h3 class="solution-title">Lead Capture & Nurturing</h3>
+          </div>
+          <div class="card-content">
+            <p class="solution-description">Comprehensive lead management that captures from multiple channels, adds to CRM, and nurtures with personalized email/SMS sequences until conversion.</p>
+            <div class="solution-features">
+              <ul>
+                <li>Multi-channel lead capture</li>
+                <li>CRM integration (HubSpot, Salesforce)</li>
+                <li>Personalized follow-up sequences</li>
+                <li>Lead scoring and qualification</li>
+                <li>Conversion tracking & analytics</li>
+              </ul>
+            </div>
+          </div>
+          <div class="card-footer">
+            <span class="complexity-badge complexity-intermediate">Intermediate</span>
+            <button class="expand-button">Details <span class="expand-icon">▼</span></button>
+          </div>
+        </div>
+
+        <div class="solution-card" data-category="sales">
+          <div class="card-header">
+            <div class="solution-icon">⭐</div>
+            <div class="solution-subtitle">Sales & Marketing</div>
+            <h3 class="solution-title">Review & Reputation Manager</h3>
+          </div>
+          <div class="card-content">
+            <p class="solution-description">Automated review requests filter negative feedback for internal follow-up and promote positive reviews to Google and social platforms.</p>
+            <div class="solution-features">
+              <ul>
+                <li>Post-service review requests</li>
+                <li>Negative feedback filtering</li>
+                <li>Multi-platform posting</li>
+                <li>Reputation monitoring & alerts</li>
+                <li>Response template automation</li>
+              </ul>
+            </div>
+          </div>
+          <div class="card-footer">
+            <span class="complexity-badge complexity-basic">Basic</span>
+            <button class="expand-button">Details <span class="expand-icon">▼</span></button>
+          </div>
+        </div>
+
+        <div class="solution-card" data-category="sales">
+          <div class="card-header">
+            <div class="solution-icon">📱</div>
+            <div class="solution-subtitle">Sales & Marketing</div>
+            <h3 class="solution-title">Social Media Automation</h3>
+          </div>
+          <div class="card-content">
+            <p class="solution-description">AI-driven creation, scheduling, and posting across Facebook, Instagram, and LinkedIn based on trends, news, and promotions.</p>
+            <div class="solution-features">
+              <ul>
+                <li>AI content creation</li>
+                <li>Multi-platform scheduling</li>
+                <li>Industry-specific planning</li>
+                <li>Engagement tracking & optimization</li>
+                <li>Brand voice consistency</li>
+              </ul>
+            </div>
+          </div>
+          <div class="card-footer">
+            <span class="complexity-badge complexity-intermediate">Intermediate</span>
+            <button class="expand-button">Details <span class="expand-icon">▼</span></button>
+          </div>
+        </div>
+
+        <div class="solution-card" data-category="sales">
+          <div class="card-header">
+            <div class="solution-icon">💡</div>
+            <div class="solution-subtitle">Sales & Marketing</div>
+            <h3 class="solution-title">Smart Upselling Engine</h3>
+          </div>
+          <div class="card-content">
+            <p class="solution-description">Predictive analytics recommends relevant products/services via targeted emails and checkout prompts to increase AOV.</p>
+            <div class="solution-features">
+              <ul>
+                <li>Purchase behavior analysis</li>
+                <li>Personalized recommendations</li>
+                <li>Targeted campaigns</li>
+                <li>Checkout upsell optimization</li>
+                <li>ROI tracking</li>
+              </ul>
+            </div>
+          </div>
+          <div class="card-footer">
+            <span class="complexity-badge complexity-advanced">Advanced</span>
+            <button class="expand-button">Details <span class="expand-icon">▼</span></button>
+          </div>
+        </div>
+
+        <!-- Operations -->
+        <div class="solution-card" data-category="operations">
+          <div class="card-header">
+            <div class="solution-icon">📦</div>
+            <div class="solution-subtitle">Operations</div>
+            <h3 class="solution-title">Smart Inventory Management</h3>
+          </div>
+          <div class="card-content">
+            <p class="solution-description">Real-time inventory tracking and predictive forecasts generate purchase orders and prevent stockout losses.</p>
+            <div class="solution-features">
+              <ul>
+                <li>Real-time stock monitoring</li>
+                <li>Predictive restock algorithms</li>
+                <li>Automated PO generation</li>
+                <li>Supplier integration</li>
+                <li>Loss prevention analytics</li>
+              </ul>
+            </div>
+          </div>
+          <div class="card-footer">
+            <span class="complexity-badge complexity-advanced">Advanced</span>
+            <button class="expand-button">Details <span class="expand-icon">▼</span></button>
+          </div>
+        </div>
+
+        <div class="solution-card" data-category="operations">
+          <div class="card-header">
+            <div class="solution-icon">💰</div>
+            <div class="solution-subtitle">Operations</div>
+            <h3 class="solution-title">Invoice & Payment Automation</h3>
+          </div>
+          <div class="card-content">
+            <p class="solution-description">Automated invoices, staged payment reminders, and integrations with Stripe/PayPal and accounting tools.</p>
+            <div class="solution-features">
+              <ul>
+                <li>Automated invoice generation</li>
+                <li>Multi-stage reminders</li>
+                <li>Stripe/PayPal integration</li>
+                <li>Accounting sync</li>
+                <li>Late payment management</li>
+              </ul>
+            </div>
+          </div>
+          <div class="card-footer">
+            <span class="complexity-badge complexity-basic">Basic</span>
+            <button class="expand-button">Details <span class="expand-icon">▼</span></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-section">
+        <h3>Need Something Custom?</h3>
+        <p>These solutions are highly flexible and customizable. If you're not sure we can create what you need, we'd love to discuss your requirements.</p>
+        <a href="mailto:support@flowcore.systems" class="contact-link">Get in Touch</a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const solutionCards = document.querySelectorAll('.solution-card');
+
+    tabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        const category = button.dataset.category;
+        solutionCards.forEach(card => {
+          if (category === 'all' || card.dataset.category === category) {
+            card.classList.remove('hidden');
+            setTimeout(() => card.classList.add('animate-in'), 100);
+          } else {
+            card.classList.add('hidden');
+            card.classList.remove('animate-in');
+          }
+        });
+      });
+    });
+
+    const expandButtons = document.querySelectorAll('.expand-button');
+    expandButtons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const card = button.closest('.solution-card');
+        card.classList.toggle('expanded');
+        button.childNodes[0].textContent = (card.classList.contains('expanded') ? 'Less' : 'Details') + ' ';
+      });
+    });
+
+    solutionCards.forEach(card => {
+      card.addEventListener('click', () => {
+        card.classList.toggle('expanded');
+        const btn = card.querySelector('.expand-button');
+        if (btn) btn.childNodes[0].textContent = (card.classList.contains('expanded') ? 'Less' : 'Details') + ' ';
+      });
+    });
+
+    setTimeout(() => {
+      solutionCards.forEach((card, index) => {
+        setTimeout(() => card.classList.add('animate-in'), index * 100);
+      });
+    }, 200);
+  </script>
+</body>
+</html>
