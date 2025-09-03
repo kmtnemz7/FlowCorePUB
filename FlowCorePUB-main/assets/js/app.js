@@ -17,64 +17,53 @@
   // Sticky header state
   const header = document.querySelector('.header');
   const onScroll = () => {
-    if (!header) return;
     if (window.scrollY > 4) header.classList.add('scrolled');
     else header.classList.remove('scrolled');
   };
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  // Accordions: only one <details> open per group
+  // Accordion setup (FAQ only)
   function makeAccordion(container) {
     const details = Array.from(container.querySelectorAll('details'));
     details.forEach((d) => {
       d.setAttribute('role', 'region');
       const sum = d.querySelector('summary');
-      if (sum) {
-        sum.setAttribute('tabindex', '0');
-        sum.setAttribute('aria-expanded', d.open ? 'true' : 'false');
-        sum.addEventListener('click', (e) => {
+      if (!sum) return;
+      sum.setAttribute('tabindex', '0');
+      sum.setAttribute('aria-expanded', d.open ? 'true' : 'false');
+      sum.addEventListener('click', (e) => {
+        e.preventDefault();
+        details.forEach((other) => {
+          if (other !== d) other.removeAttribute('open');
+        });
+        if (d.hasAttribute('open')) {
+          d.removeAttribute('open');
+          sum.setAttribute('aria-expanded', 'false');
+        } else {
+          d.setAttribute('open', '');
+          sum.setAttribute('aria-expanded', 'true');
+          d.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      });
+      sum.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          // Close all others
-          details.forEach((other) => {
-            if (other !== d) other.removeAttribute('open');
-          });
-          // Toggle this one
-          if (d.hasAttribute('open')) {
-            d.removeAttribute('open');
-            sum.setAttribute('aria-expanded', 'false');
-          } else {
-            d.setAttribute('open', '');
-            sum.setAttribute('aria-expanded', 'true');
-            d.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          }
-        });
-        sum.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            sum.click();
-          }
-        });
-      }
+          sum.click();
+        }
+      });
     });
-  }
-
-  // Apply to Solutions and each FAQ column
-  const solutionsSection = document.querySelector('#solutions');
-  if (solutionsSection) {
-    makeAccordion(solutionsSection);
   }
   document.querySelectorAll('#faq .faq').forEach(makeAccordion);
 
-  // Year in footer
+  // Footer year
   const y = document.getElementById('year');
   if (y) y.textContent = new Date().getFullYear();
 
-  // Modal Toggle
-  const modal = document.querySelector('[data-animate="modal"]');
+  // Modal toggle
+  const modal = document.querySelector('.modal');
   const modalClose = document.querySelector('.modal-close');
   const modalTriggers = document.querySelectorAll('[data-modal-trigger]');
-
   if (modal && modalClose) {
     modalTriggers.forEach(trigger => {
       trigger.addEventListener('click', (e) => {
@@ -82,15 +71,12 @@
         modal.setAttribute('open', '');
       });
     });
-    modalClose.addEventListener('click', () => {
-      modal.removeAttribute('open');
-    });
+    modalClose.addEventListener('click', () => modal.removeAttribute('open'));
     modal.addEventListener('click', (e) => {
-      if (e.target === modal.querySelector('[data-animate="backdrop"]')) {
+      if (e.target.classList.contains('modal-backdrop')) {
         modal.removeAttribute('open');
       }
     });
-    // Keyboard: Close modal with Escape
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && modal.hasAttribute('open')) {
         modal.removeAttribute('open');
@@ -98,81 +84,58 @@
     });
   }
 
-  // Card, Badge, and Highlight Animations on Load
+  // Animate cards, badges, and highlights on load
   document.addEventListener('DOMContentLoaded', () => {
-    const elements = document.querySelectorAll('[data-animate="card"], [data-animate="badge"], [data-animate="highlight"]');
-    elements.forEach((el, index) => {
-      setTimeout(() => {
-        el.classList.add('animate-in');
-        el.addEventListener('transitionend', () => {
-          el.classList.add('animation-end');
-        }, { once: true });
-      }, index * 20); // Stagger by 20ms
+    const animEls = document.querySelectorAll('[data-animate="card"], [data-animate="badge"], [data-animate="highlight"]');
+    animEls.forEach((el, index) => {
+      setTimeout(() => el.classList.add('animate-in'), index * 30);
     });
   });
 
-  // Cleanup will-change on animation end
-  document.querySelectorAll('[data-animate]').forEach(el => {
-    el.addEventListener('transitionend', () => {
-      el.classList.add('animation-end');
-    }, { once: true });
-  });
-
-  // Category filtering
-  const tabButtons = document.querySelectorAll('.tab-button');
-  const solutionCards = document.querySelectorAll('.solution-card');
-
-  tabButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      // Update active tab
-      tabButtons.forEach(btn => btn.classList.remove('active'));
-      button.classList.add('active');
-
-      const category = button.dataset.category;
-
-      // Filter cards
+  // Solutions: category filtering with event delegation
+  const solutionsContainer = document.querySelector('.solutions-grid');
+  const tabContainer = document.querySelector('.category-tabs');
+  if (solutionsContainer && tabContainer) {
+    const solutionCards = solutionsContainer.querySelectorAll('.solution-card');
+    tabContainer.addEventListener('click', (e) => {
+      const btn = e.target.closest('.tab-button');
+      if (!btn) return;
+      tabContainer.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const category = btn.dataset.category;
       solutionCards.forEach(card => {
         if (category === 'all' || card.dataset.category === category) {
           card.classList.remove('hidden');
-          setTimeout(() => card.classList.add('animate-in'), 100);
+          setTimeout(() => card.classList.add('animate-in'), 50);
         } else {
           card.classList.add('hidden');
           card.classList.remove('animate-in');
         }
       });
     });
-  });
 
-  // Expand/collapse functionality
-  const expandButtons = document.querySelectorAll('.expand-button');
+    // Expand/collapse
+    solutionsContainer.addEventListener('click', (e) => {
+      const expandBtn = e.target.closest('.expand-button');
+      const card = e.target.closest('.solution-card');
+      if (!card) return;
 
-  expandButtons.forEach(button => {
-    button.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const card = button.closest('.solution-card');
-      card.classList.toggle('expanded');
-      
-      const buttonText = card.classList.contains('expanded') ? 'Less' : 'Details';
-      button.childNodes[0].textContent = buttonText + ' ';
+      if (expandBtn) {
+        e.stopPropagation();
+        card.classList.toggle('expanded');
+        expandBtn.firstChild.textContent = card.classList.contains('expanded') ? 'Less ' : 'Details ';
+      } else {
+        card.classList.toggle('expanded');
+        const btn = card.querySelector('.expand-button');
+        if (btn) btn.firstChild.textContent = card.classList.contains('expanded') ? 'Less ' : 'Details ';
+      }
     });
-  });
 
-  // Card click to expand (optional)
-  solutionCards.forEach(card => {
-    card.addEventListener('click', () => {
-      card.classList.toggle('expanded');
-      const button = card.querySelector('.expand-button');
-      const buttonText = card.classList.contains('expanded') ? 'Less' : 'Details';
-      button.childNodes[0].textContent = buttonText + ' ';
-    });
-  });
-
-  // Initial animation for solution cards
-  setTimeout(() => {
-    solutionCards.forEach((card, index) => {
-      setTimeout(() => {
-        card.classList.add('animate-in');
-      }, index * 100);
-    });
-  }, 200);
+    // Initial animation
+    setTimeout(() => {
+      solutionCards.forEach((card, index) => {
+        setTimeout(() => card.classList.add('animate-in'), index * 100);
+      });
+    }, 200);
+  }
 })();
