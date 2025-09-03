@@ -411,3 +411,54 @@ input:focus-visible,
   transform: translateY(0);
   opacity: 1;
 }
+/* =======================
+   Solutions Grid Cards
+======================= */
+.solution-card {
+  background: var(--bg-2);
+  border: 1px solid var(--b);
+  border-radius: var(--border-radius);
+  padding: 20px;
+  transition:
+    border-color var(--motion-med) var(--ease-decel),
+    box-shadow var(--motion-med) var(--ease-decel),
+    transform var(--motion-med) var(--ease-decel),
+    max-height var(--motion-slow) var(--ease-standard),
+    padding var(--motion-slow) var(--ease-standard);
+  overflow: hidden;
+  max-height: 280px; /* collapsed height */
+  cursor: pointer;
+}
+
+.solution-card:hover {
+  border-color: var(--acc1);
+  box-shadow: var(--elev-1);
+  transform: translateY(-2px);
+}
+
+.solution-card.expanded {
+  max-height: 1000px; /* enough space for all content */
+  padding: 24px;
+}
+
+.solution-card .card-content,
+.solution-card .solution-features {
+  opacity: 1;
+  transition: opacity var(--motion-fast) var(--ease-standard);
+}
+
+.solution-card:not(.expanded) .card-content,
+.solution-card:not(.expanded) .solution-features {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Optional: smooth icon rotation */
+.expand-button .expand-icon {
+  display: inline-block;
+  transition: transform var(--motion-fast) var(--ease-standard);
+}
+
+.solution-card.expanded .expand-icon {
+  transform: rotate(180deg);
+}
