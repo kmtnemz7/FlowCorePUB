@@ -71,7 +71,11 @@
     }
     .contact-section h3{ margin:0 0 8px; font-size:1.35rem }
     .contact-section p{ margin:0 0 10px; color:var(--fg-muted) }
-    .contact-link{ color:var(--acc1); font-weight:800; text-decoration:none; border-bottom:1px solid var(--acc1) }
+    .contact-link {
+      display: inline-block; padding: 6px 12px; background: rgba(59, 130, 246, 0.1);
+      color: var(--acc1); text-decoration: none; border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 20px; font-size: 14px; font-weight: 500;
+    }
     .contact-link:hover{ filter:brightness(1.1) }
 
     /* Layout */
@@ -180,7 +184,7 @@
       <div class="contact-section">
         <h3>Still have questions?</h3>
         <p>We’ll respond quickly with specifics for your workflow.</p>
-        <a href="mailto:support@flowcore.systems" class="contact-link">Email support@flowcore.systems</a>
+        <a href="mailto:support@flowcore.systems" class="contact-link">support@flowcore.systems</a>
       </div>
     </div>
   </section>
