@@ -4,172 +4,635 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>FAQ — FlowCore</title>
-  <meta name="description" content="Answers to common questions about FlowCore’s AI automations, setup, security, and support." />
+  <meta name="description" content="Answers to common questions about FlowCore's AI automations, setup, security, and support." />
   <meta name="theme-color" content="#0b1220" />
   <link rel="manifest" href="/manifest.json" />
   <link rel="icon" href="/assets/img/icon.png" />
   <link rel="apple-touch-icon" href="/assets/img/icon-192.png" />
-  <link rel="stylesheet" href="/assets/css/style.css" />
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     :root {
-      --bg:#0b1220;
-      --bg-2:#1a2332;
-      --fg:#fff;
-      --fg-muted:#94a3b8;
-      --acc1:#3b82f6;
-      --b:#334155;
-      --ring:rgba(59,130,246,.2);
-      --elev-1:0 2px 8px rgba(0,0,0,.18);
-      --ease:cubic-bezier(.2,0,0,1);
-      --fast:200ms;
-      --med:380ms;
+      --primary: #3b82f6;
+      --primary-dark: #2563eb;
+      --secondary: #10b981;
+      --accent: #06b6d4;
+      --background: #0b1220;
+      --surface: #1e293b;
+      --surface-light: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: rgba(255, 255, 255, 0.1);
+      --border-hover: rgba(59, 130, 246, 0.3);
+      --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      --gradient-bg: linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(16, 185, 129, 0.06) 100%);
     }
 
-    /* FAQ title panel (match CTA style) */
-    #faq .faq-hero{
-      margin:16px 0 24px;
-      padding:28px;
-      border:1px solid var(--b);
-      border-radius:16px;
-      background:linear-gradient(135deg,rgba(59,130,246,.08),rgba(16,185,129,.06));
-    }
-    #faq .faq-hero h2{
-      margin:0 0 8px;
-      font-size:clamp(1.8rem,3.2vw,2.4rem);
-      font-weight:800;
-    }
-    #faq .faq-hero p{
-      margin:0;
-      color:var(--fg-muted);
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
     }
 
-    /* Actions */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Header Styles */
+    .header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(11, 18, 32, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 600;
+      font-size: 1.25rem;
+    }
+
+    .logo img {
+      border-radius: 6px;
+    }
+
+    .menu {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: var(--text-muted);
+      transition: color 0.3s ease;
+      position: relative;
+    }
+
+    .menu a:hover, .menu a.active {
+      color: var(--primary);
+    }
+
+    .menu a.active::after {
+      content: '';
+      position: absolute;
+      bottom: -0.5rem;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--primary);
+      border-radius: 1px;
+    }
+
+    #menu-toggle, .burger {
+      display: none;
+    }
+
+    /* Section */
+    .section {
+      padding: 6rem 0;
+      position: relative;
+    }
+
+    .section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 70%, rgba(16, 185, 129, 0.1) 0%, transparent 50%),
+                  radial-gradient(circle at 40% 90%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    /* FAQ Hero Section */
+    .faq-hero {
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 3rem 2.5rem;
+      margin-bottom: 3rem;
+      backdrop-filter: blur(20px);
+      position: relative;
+      overflow: hidden;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .faq-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--gradient-1);
+      border-radius: 20px 20px 0 0;
+    }
+
+    .faq-hero h2 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--text) 0%, var(--primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .faq-hero p {
+      color: var(--text-muted);
+      font-size: 1.25rem;
+      max-width: 600px;
+    }
+
+    /* FAQ Toolbar */
     .faq-toolbar {
       display: flex;
       justify-content: center;
-      gap: 10px;
-      margin: 8px 0 26px;
+      gap: 1rem;
+      margin-bottom: 3rem;
+      animation: fadeInUp 0.8s ease-out 0.2s both;
     }
+
     .btn-small {
-      font-size: 14px;
-      padding: 10px 14px;
-      border-radius: 8px;
-      border: 1px solid var(--b);
-      background: transparent;
-      color: var(--fg);
+      font-size: 0.875rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: rgba(30, 41, 59, 0.8);
+      color: var(--text);
       cursor: pointer;
-      transition: all var(--fast) var(--ease);
+      transition: all 0.3s ease;
+      font-weight: 500;
+      backdrop-filter: blur(20px);
+      position: relative;
+      overflow: hidden;
     }
+
+    .btn-small::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transition: left 0.5s;
+    }
+
     .btn-small:hover {
-      border-color: var(--acc1);
-      color: var(--acc1);
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(59, 130, 246, 0.2);
+    }
+
+    .btn-small:hover::before {
+      left: 100%;
+    }
+
+    .btn-small:active {
       transform: translateY(-1px);
     }
 
-    /* Two columns */
+    /* Grid Layout */
     .grid2 {
       display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(320px,1fr));
-      gap: 16px;
-      margin-top: 8px;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 2rem;
+      margin-bottom: 4rem;
     }
 
-    /* FAQ items */
-    .faq details {
-      background: var(--bg-2);
-      border: 1px solid var(--b);
-      border-radius: 10px;
-      overflow: hidden;
-      transition: border-color var(--fast) var(--ease), box-shadow var(--fast) var(--ease);
+    .faq[data-faq-col="1"] {
+      animation: slideInLeft 0.6s ease-out 0.4s both;
     }
+
+    .faq[data-faq-col="2"] {
+      animation: slideInRight 0.6s ease-out 0.6s both;
+    }
+
+    /* FAQ Items */
+    .faq details {
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(20px);
+      position: relative;
+    }
+
+    .faq details::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--gradient-1);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.4s ease;
+    }
+
+    .faq details:nth-child(2n)::before {
+      background: var(--gradient-2);
+    }
+
+    .faq details:nth-child(3n)::before {
+      background: var(--gradient-3);
+    }
+
+    .faq details:hover {
+      transform: translateX(8px);
+      border-color: var(--border-hover);
+      box-shadow: 0 10px 30px rgba(59, 130, 246, 0.15);
+    }
+
+    .faq details:hover::before {
+      transform: scaleY(1);
+    }
+
     .faq details[open] {
-      border-color: var(--acc1);
-      box-shadow: var(--elev-1);
+      border-color: var(--primary);
+      box-shadow: 0 15px 35px rgba(59, 130, 246, 0.2);
+    }
+
+    .faq details[open]::before {
+      transform: scaleY(1);
     }
 
     .faq summary {
       list-style: none;
-      padding: 18px 20px;
+      padding: 1.5rem 2rem;
       cursor: pointer;
-      font-weight: 700;
+      font-weight: 600;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 1rem;
       user-select: none;
+      transition: all 0.3s ease;
+      position: relative;
+      font-size: 1.1rem;
     }
+
     .faq summary::-webkit-details-marker {
       display: none;
     }
+
+    .faq summary:hover {
+      color: var(--primary);
+    }
+
     .faq-caret {
-      width: 18px;
-      height: 18px;
-      border: 2px solid var(--fg-muted);
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--text-muted);
       border-left: 0;
       border-top: 0;
       transform: rotate(45deg);
-      transition: transform var(--fast) var(--ease), border-color var(--fast) var(--ease);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      flex-shrink: 0;
     }
-    details[open] > summary .faq-caret {
+
+    .faq details[open] > summary .faq-caret {
       transform: rotate(-135deg);
-      border-color: var(--acc1);
+      border-color: var(--primary);
+    }
+
+    .faq summary:hover .faq-caret {
+      border-color: var(--primary);
+      transform: rotate(45deg) scale(1.1);
+    }
+
+    .faq details[open] > summary:hover .faq-caret {
+      transform: rotate(-135deg) scale(1.1);
     }
 
     .faq-body {
-      padding: 0 20px 18px 46px;
-      color: var(--fg-muted);
-      line-height: 1.6;
-      display: grid;
-      grid-template-rows: 1fr;
-      opacity: 1; /* visible by default */
-      transition: grid-template-rows var(--med) var(--ease), opacity var(--med) var(--ease);
+      padding: 0 2rem 1.5rem 4rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      font-size: 1rem;
+      animation: fadeInContent 0.4s ease-out;
     }
-    .faq-body > div {
+
+    .faq-body a {
+      color: var(--secondary);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .faq-body a:hover {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+
+    /* Contact Section */
+    .contact-section {
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 3rem 2.5rem;
+      text-align: center;
+      backdrop-filter: blur(20px);
+      position: relative;
+      overflow: hidden;
+      animation: fadeInUp 0.8s ease-out 0.8s both;
+    }
+
+    .contact-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(from 0deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+      animation: rotate 20s linear infinite;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .contact-section:hover::before {
+      opacity: 1;
+    }
+
+    .contact-section h3 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .contact-section p {
+      color: var(--text-muted);
+      font-size: 1.125rem;
+      margin-bottom: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .contact-link {
+      display: inline-block;
+      padding: 0.75rem 2rem;
+      background: var(--gradient-3);
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
       overflow: hidden;
     }
 
-    /* CTA */
-    .contact-section {
-      margin-top: 32px;
-      padding: 28px;
-      border: 1px solid var(--b);
-      border-radius: 16px;
-      background: linear-gradient(135deg,rgba(59,130,246,.08),rgba(16,185,129,.06));
-    }
-    .contact-section h3 {
-      margin: 0 0 8px;
-      font-size: 1.35rem;
-    }
-    .contact-section p {
-      margin: 0 0 10px;
-      color: var(--fg-muted);
-    }
-    .contact-link {
-      display: inline-block;
-      padding: 6px 12px;
-      background: rgba(59, 130, 246, 0.1);
-      color: var(--acc1);
-      text-decoration: none;
-      border: 1px solid rgba(59, 130, 246, 0.2);
-      border-radius: 20px;
-      font-size: 14px;
-      font-weight: 500;
-    }
-    .contact-link:hover {
-      filter: brightness(1.1);
+    .contact-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s;
     }
 
-    /* Layout */
-    body {
-      background: var(--bg);
-      color: var(--fg);
+    .contact-link:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(6, 182, 212, 0.4);
     }
-    .section {
-      padding: 80px 0;
+
+    .contact-link:hover::before {
+      left: 100%;
     }
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
+
+    /* Footer */
+    .footer {
+      background: rgba(15, 23, 42, 0.8);
+      border-top: 1px solid var(--border);
+      padding: 3rem 0;
+      margin-top: 6rem;
+      backdrop-filter: blur(20px);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .footer-brand {
+      font-weight: 600;
+      font-size: 1.125rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    .footer-copy {
+      color: var(--text-muted);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes fadeInContent {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+      .nav {
+        padding: 1rem;
+      }
+
+      .burger {
+        display: block;
+        width: 24px;
+        height: 20px;
+        cursor: pointer;
+        position: relative;
+      }
+
+      .burger span,
+      .burger span::before,
+      .burger span::after {
+        display: block;
+        width: 100%;
+        height: 2px;
+        background: var(--text);
+        border-radius: 1px;
+        transition: all 0.3s ease;
+      }
+
+      .burger span::before,
+      .burger span::after {
+        content: '';
+        position: absolute;
+      }
+
+      .burger span::before { top: -8px; }
+      .burger span::after { top: 8px; }
+
+      .menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(11, 18, 32, 0.95);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 2rem;
+        gap: 1rem;
+        border-top: 1px solid var(--border);
+      }
+
+      #menu-toggle:checked ~ .menu {
+        display: flex;
+      }
+
+      .section {
+        padding: 4rem 0;
+      }
+
+      .faq-hero {
+        padding: 2rem 1.5rem;
+      }
+
+      .grid2 {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .faq-toolbar {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .faq details {
+        margin: 0 1rem 1rem;
+      }
+
+      .faq summary {
+        padding: 1.25rem 1.5rem;
+        font-size: 1rem;
+      }
+
+      .faq-body {
+        padding: 0 1.5rem 1.25rem 3rem;
+        font-size: 0.9rem;
+      }
+
+      .contact-section {
+        padding: 2rem 1.5rem;
+        margin: 2rem 1rem 0;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .footer-links {
+        order: -1;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .grid2 {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -187,8 +650,8 @@
       <label for="menu-toggle" class="burger" aria-label="Toggle Menu"><span></span></label>
       <nav class="menu" id="menu">
         <a href="/solutions">Solutions</a>
-        <a href="/pricing" class="active">Pricing</a>
-        <a href="/faq">FAQ</a>
+        <a href="/pricing">Pricing</a>
+        <a href="/faq" class="active">FAQ</a>
         <a href="/contact">Contact</a>
       </nav>
     </div>
@@ -234,7 +697,7 @@
           <details id="faq-human-loop" open>
             <summary><span class="faq-caret"></span>Can we keep a human in the loop?</summary>
             <div class="faq-body"><div>
-              Yes. Start in “draft then approve” mode, then graduate to auto-send with guardrails per channel or intent.
+              Yes. Start in "draft then approve" mode, then graduate to auto-send with guardrails per channel or intent.
             </div></div>
           </details>
         </div>
@@ -274,7 +737,7 @@
       <!-- Contact CTA -->
       <div class="contact-section">
         <h3>Still have questions?</h3>
-        <p>We’ll respond quickly with specifics for your workflow.</p>
+        <p>We'll respond quickly with specifics for your workflow.</p>
         <a href="mailto:support@flowcore.systems" class="contact-link">support@flowcore.systems</a>
       </div>
     </div>
@@ -290,16 +753,69 @@
         <a href="/faq">FAQ</a>
         <a href="/contact">Contact</a>
       </nav>
-      <div class="footer-copy">© <span id="year"></span> FlowCore</div>
+      <div class="footer-copy">© <span id="year">2025</span> FlowCore</div>
     </div>
   </footer>
 
-  <script src="/assets/js/app.js"></script>
   <script>
+    // Set current year
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // FAQ expand/collapse functionality
     const allDetails = Array.from(document.querySelectorAll('.faq details'));
-    document.getElementById('faq-expand').addEventListener('click', () => allDetails.forEach(d => d.open = true));
-    document.getElementById('faq-collapse').addEventListener('click', () => allDetails.forEach(d => d.open = false));
+    
+    document.getElementById('faq-expand').addEventListener('click', () => {
+      allDetails.forEach(d => d.open = true);
+    });
+    
+    document.getElementById('faq-collapse').addEventListener('click', () => {
+      allDetails.forEach(d => d.open = false);
+    });
+
+    // Add scroll effects to header
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('.header');
+      if (window.scrollY > 100) {
+        header.style.background = 'rgba(11, 18, 32, 0.98)';
+      } else {
+        header.style.background = 'rgba(11, 18, 32, 0.95)';
+      }
+    });
+
+    // Add intersection observer for enhanced animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    // Observe FAQ items for scroll animations
+    document.querySelectorAll('.faq details').forEach((el, index) => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+      observer.observe(el);
+    });
+
+    // Enhanced caret animation on toggle
+    allDetails.forEach(details => {
+      details.addEventListener('toggle', () => {
+        const caret = details.querySelector('.faq-caret');
+        if (details.open) {
+          caret.style.transform = 'rotate(-135deg)';
+        } else {
+          caret.style.transform = 'rotate(45deg)';
+        }
+      });
+    });
   </script>
 </body>
 </html>
