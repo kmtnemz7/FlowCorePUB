@@ -758,64 +758,61 @@
   </footer>
 
   <script>
-    // Set current year
-    document.getElementById('year').textContent = new Date().getFullYear();
+  // Query once
+  const allDetails = Array.from(document.querySelectorAll('.faq details'));
 
-    // FAQ expand/collapse functionality
-    const allDetails = Array.from(document.querySelectorAll('.faq details'));
-    
-    document.getElementById('faq-expand').addEventListener('click', () => {
-      allDetails.forEach(d => d.open = true);
-    });
-    
-    document.getElementById('faq-collapse').addEventListener('click', () => {
-      allDetails.forEach(d => d.open = false);
-    });
+  // Ensure closed on first paint
+  allDetails.forEach(d => d.removeAttribute('open'));
+  requestAnimationFrame(() => allDetails.forEach(d => d.open = false));
 
-    // Add scroll effects to header
-    window.addEventListener('scroll', () => {
-      const header = document.querySelector('.header');
-      if (window.scrollY > 100) {
-        header.style.background = 'rgba(11, 18, 32, 0.98)';
-      } else {
-        header.style.background = 'rgba(11, 18, 32, 0.95)';
+  // Also handle bfcache/back nav restores
+  window.addEventListener('pageshow', () => {
+    allDetails.forEach(d => d.open = false);
+  });
+
+  // Set current year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Expand/Collapse buttons
+  document.getElementById('faq-expand').addEventListener('click', () => {
+    allDetails.forEach(d => d.open = true);
+  });
+  document.getElementById('faq-collapse').addEventListener('click', () => {
+    allDetails.forEach(d => d.open = false);
+  });
+
+  // Header scroll effect
+  window.addEventListener('scroll', () => {
+    const header = document.querySelector('.header');
+    header.style.background = window.scrollY > 100
+      ? 'rgba(11, 18, 32, 0.98)'
+      : 'rgba(11, 18, 32, 0.95)';
+  });
+
+  // Intersection observer animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
       }
     });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-    // Add intersection observer for enhanced animations
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
+  document.querySelectorAll('.faq details').forEach((el, index) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+    observer.observe(el);
+  });
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }
-      });
-    }, observerOptions);
-
-    // Observe FAQ items for scroll animations
-    document.querySelectorAll('.faq details').forEach((el, index) => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(30px)';
-      el.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
-      observer.observe(el);
+  // Caret animation
+  allDetails.forEach(details => {
+    details.addEventListener('toggle', () => {
+      const caret = details.querySelector('.faq-caret');
+      caret.style.transform = details.open ? 'rotate(-135deg)' : 'rotate(45deg)';
     });
-
-    // Enhanced caret animation on toggle
-    allDetails.forEach(details => {
-      details.addEventListener('toggle', () => {
-        const caret = details.querySelector('.faq-caret');
-        if (details.open) {
-          caret.style.transform = 'rotate(-135deg)';
-        } else {
-          caret.style.transform = 'rotate(45deg)';
-        }
-      });
-    });
-  </script>
+  });
+</script>
 </body>
 </html>
