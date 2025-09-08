@@ -479,11 +479,13 @@
     window.addEventListener('scroll', () => {
       const header = document.querySelector('.header');
       if (window.scrollY > 100) {
-        header.style.background = 'rgba(11, 18, 32, 0.98)';
+        // very light green tint
+        header.style.background = 'rgba(238, 245, 238, 0.95)'; // close to #EEF5EE
       } else {
-        header.style.background = 'rgba(11, 18, 32, 0.95)';
+        // white at top
+        header.style.background = 'rgba(255, 255, 255, 0.90)';
       }
-    });
+    });;
 
     // Add intersection observer for enhanced animations
     const observerOptions = {
@@ -509,14 +511,21 @@
     /* Added JS for extra, non-breaking FX   */
     /* ------------------------------------- */
 
-    // Progress bar + shadow toggle (keeps original background logic)
+    // Progress bar + shadow toggle (light green on scroll)
     window.addEventListener('scroll', () => {
       const header = document.querySelector('.header');
-      header.classList.toggle('scrolled', window.scrollY > 100);
+      const scrolled = window.scrollY > 100;
+      header.classList.toggle('scrolled', scrolled);
+
       const h = document.documentElement;
       const max = h.scrollHeight - h.clientHeight;
       const p = Math.max(0, Math.min(1, window.scrollY / max));
       header.style.setProperty('--scroll', p);
+
+      // background: white at top → very light green after 100px
+      header.style.background = scrolled
+        ? 'rgba(238, 245, 238, 0.95)' // ~#EEF5EE
+        : 'rgba(255, 255, 255, 0.90)';
     });
 
     // Reveal with class for [data-animate]
