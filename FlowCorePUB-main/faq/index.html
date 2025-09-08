@@ -54,6 +54,14 @@
   z-index: 1000;
   transition: background 0.3s ease, box-shadow 0.3s ease;
 }
+.header::after{
+  content:'';
+  position:absolute; left:0; bottom:0; height:2px; width:100%;
+  background: var(--primary);
+  transform: scaleX(var(--scroll, 0));
+  transform-origin: 0 50%;
+}
+.header.scrolled{ box-shadow: 0 10px 30px rgba(16,24,16,0.12); }
 .nav{
   height: 64px;
   display: flex;
@@ -444,21 +452,21 @@
             </div></div>
           </details>
 
-          <details id="faq-setup" open>
+          <details id="faq-setup">
             <summary><span class="faq-caret"></span>How long does setup take?</summary>
             <div class="faq-body"><div>
               A standard build ships in 7 days including discovery, build, QA, and go-live.
             </div></div>
           </details>
 
-          <details id="faq-requirements" open>
+          <details id="faq-requirements">
             <summary><span class="faq-caret"></span>What do you need from us to start?</summary>
             <div class="faq-body"><div>
               Access to calendars/booking tools, messaging channels (email/SMS), and basic copy or brand tone. We follow least-privilege access.
             </div></div>
           </details>
 
-          <details id="faq-human-loop" open>
+          <details id="faq-human-loop">
             <summary><span class="faq-caret"></span>Can we keep a human in the loop?</summary>
             <div class="faq-body"><div>
               Yes. Start in "draft then approve" mode, then graduate to auto-send with guardrails per channel or intent.
@@ -468,28 +476,28 @@
 
         <!-- Column 2 -->
         <div class="faq" data-faq-col="2">
-          <details id="faq-security" open>
+          <details id="faq-security">
             <summary><span class="faq-caret"></span>Is it secure?</summary>
             <div class="faq-body"><div>
               Yes. We use least-privilege access, store keys in vaults, minimize PII, and remove access at offboarding. Audit logs available on request.
             </div></div>
           </details>
 
-          <details id="faq-support" open>
+          <details id="faq-support">
             <summary><span class="faq-caret"></span>What support do we get?</summary>
             <div class="faq-body"><div>
               Monitoring, error alerts, monthly KPI reports, and small change requests under the Care Plan.
             </div></div>
           </details>
 
-          <details id="faq-pricing" open>
+          <details id="faq-pricing">
             <summary><span class="faq-caret"></span>How is pricing structured?</summary>
             <div class="faq-body"><div>
               Fixed implementation plus a monthly Care Plan. See <a href="/pricing">Pricing</a> for current tiers.
             </div></div>
           </details>
 
-          <details id="faq-integrations" open>
+          <details id="faq-integrations">
             <summary><span class="faq-caret"></span>Which tools do you integrate with?</summary>
             <div class="faq-body"><div>
               Commonly Google Calendar, Outlook, Stripe, PayPal, HubSpot, Salesforce, Facebook, and website chat. Ask about others.
@@ -525,15 +533,6 @@
   // Query once
   const allDetails = Array.from(document.querySelectorAll('.faq details'));
 
-  // Ensure closed on first paint
-  allDetails.forEach(d => d.removeAttribute('open'));
-  requestAnimationFrame(() => allDetails.forEach(d => d.open = false));
-
-  // Also handle bfcache/back nav restores
-  window.addEventListener('pageshow', () => {
-    allDetails.forEach(d => d.open = false);
-  });
-
   // Set current year
   document.getElementById('year').textContent = new Date().getFullYear();
 
@@ -545,12 +544,10 @@
     allDetails.forEach(d => d.open = false);
   });
 
-  // Header scroll effect
   // Header progress + shadow + light-green background on scroll
-  window.addEventListener('scroll', () => {
+  function setHeaderState() {
     const header = document.querySelector('.header');
     if (!header) return;
-
     const scrolled = window.scrollY > 100;
     header.classList.toggle('scrolled', scrolled);
 
@@ -559,17 +556,12 @@
     const p = Math.max(0, Math.min(1, window.scrollY / max));
     header.style.setProperty('--scroll', p);
 
-    // white at top → very light green after 100px
     header.style.background = scrolled
       ? 'rgba(238, 245, 238, 0.95)'  // ~#EEF5EE
       : 'rgba(255, 255, 255, 0.90)';
-  });
-
-    const header = document.querySelector('.header');
-    header.style.background = window.scrollY > 100
-      ? 'rgba(238, 245, 238, 0.95)' // very light green (~#EEF5EE)
-      : 'rgba(255, 255, 255, 0.90)'; // white at top
-  });
+  }
+  window.addEventListener('scroll', setHeaderState);
+  setHeaderState(); // initial
 
   // Intersection observer animations
   const observer = new IntersectionObserver((entries) => {
@@ -592,9 +584,9 @@
   allDetails.forEach(details => {
     details.addEventListener('toggle', () => {
       const caret = details.querySelector('.faq-caret');
-      caret.style.transform = details.open ? 'rotate(-135deg)' : 'rotate(45deg)';
+      if (caret) caret.style.transform = details.open ? 'rotate(-135deg)' : 'rotate(45deg)';
     });
   });
-</script>
+  </script>
 </body>
 </html>
