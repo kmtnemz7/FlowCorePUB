@@ -546,8 +546,25 @@
   });
 
   // Header scroll effect
-  // Header scroll effect
+  // Header progress + shadow + light-green background on scroll
   window.addEventListener('scroll', () => {
+    const header = document.querySelector('.header');
+    if (!header) return;
+
+    const scrolled = window.scrollY > 100;
+    header.classList.toggle('scrolled', scrolled);
+
+    const h = document.documentElement;
+    const max = h.scrollHeight - h.clientHeight;
+    const p = Math.max(0, Math.min(1, window.scrollY / max));
+    header.style.setProperty('--scroll', p);
+
+    // white at top → very light green after 100px
+    header.style.background = scrolled
+      ? 'rgba(238, 245, 238, 0.95)'  // ~#EEF5EE
+      : 'rgba(255, 255, 255, 0.90)';
+  });
+
     const header = document.querySelector('.header');
     header.style.background = window.scrollY > 100
       ? 'rgba(238, 245, 238, 0.95)' // very light green (~#EEF5EE)
