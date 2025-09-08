@@ -546,11 +546,12 @@
   });
 
   // Header scroll effect
+  // Header scroll effect
   window.addEventListener('scroll', () => {
     const header = document.querySelector('.header');
     header.style.background = window.scrollY > 100
-      ? 'rgba(11, 18, 32, 0.98)'
-      : 'rgba(11, 18, 32, 0.95)';
+      ? 'rgba(238, 245, 238, 0.95)' // very light green (~#EEF5EE)
+      : 'rgba(255, 255, 255, 0.90)'; // white at top
   });
 
   // Intersection observer animations
