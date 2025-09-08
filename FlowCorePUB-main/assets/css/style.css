@@ -2,14 +2,15 @@
    THEME VARIABLES
 ======================= */
 :root {
-  --bg: #0b1220;
-  --bg-2: #1a2332;
-  --fg: #ffffff;
-  --fg-muted: #aeb8c6;
-  --acc1: #3b82f6;
-  --acc2: #10b981;
-  --b: #334155;
-  --ring: rgba(59, 130, 246, 0.2);
+  --bg: #F8FAF8;
+  --bg-2: #FFFFFF;
+  --fg: #1F2A1F;
+  --fg-muted: #5A6C5A;
+
+  --acc1: #6B8F71; /* primary sage */
+  --acc2: #A3B18A; /* soft sage */
+  --b: #E4EDE4;
+  --ring: rgba(107, 143, 113, 0.22);
 
   --border-radius: 12px;
 
@@ -22,8 +23,8 @@
   --ease-spring-lite: cubic-bezier(0.4, 0, 0.2, 1);
 
   /* Elevations */
-  --elev-1: 0 2px 8px rgba(0, 0, 0, 0.08);
-  --elev-2: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --elev-1: 0 2px 8px rgba(16, 24, 16, 0.06);
+  --elev-2: 0 8px 24px rgba(16, 24, 16, 0.12);
 }
 
 /* =======================
@@ -37,9 +38,7 @@
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -52,16 +51,9 @@ body {
 /* =======================
    UTILITIES
 ======================= */
-.maxw {
-  max-width: 600px;
-  margin: 0 auto;
-}
+.maxw { max-width: 600px; margin: 0 auto; }
 
-.muted {
-  color: var(--fg-muted);
-  text-align: center;
-  margin-bottom: 48px;
-}
+.muted { color: var(--fg-muted); text-align: center; margin-bottom: 48px; }
 
 a:focus-visible,
 button:focus-visible,
@@ -75,29 +67,16 @@ input:focus-visible {
 /* =======================
    LAYOUT
 ======================= */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-.section {
-  padding: 80px 0;
-}
+.section { padding: 80px 0; }
 
 .grid2,
-.grid3 {
-  display: grid;
-  gap: 24px;
-}
+.grid3 { display: grid; gap: 24px; }
 
-.grid2 {
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-}
+.grid2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
 
-.grid3 {
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-}
+.grid3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
 
 /* =======================
    HEADER & NAV
@@ -106,7 +85,7 @@ input:focus-visible {
   position: fixed;
   top: 0;
   width: 100%;
-  background: rgba(11, 18, 32, 0.9);
+  background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--b);
   z-index: 100;
@@ -114,7 +93,7 @@ input:focus-visible {
 }
 
 .header.scrolled {
-  background: rgba(11, 18, 32, 0.95);
+  background: rgba(255, 255, 255, 0.95);
   box-shadow: var(--elev-1);
 }
 
@@ -145,10 +124,7 @@ input:focus-visible {
 }
 
 /* NAV LINKS */
-.menu {
-  display: flex;
-  gap: 32px;
-}
+.menu { display: flex; gap: 32px; }
 
 .menu a {
   text-decoration: none;
@@ -158,9 +134,7 @@ input:focus-visible {
 }
 
 .menu a:hover,
-.menu a:focus-visible {
-  color: var(--acc1);
-}
+.menu a:focus-visible { color: var(--acc1); }
 
 /* BURGER MENU */
 .burger {
@@ -181,22 +155,11 @@ input:focus-visible {
   position: relative;
 }
 
-.burger span::before {
-  content: '';
-  position: absolute;
-  top: -6px;
-}
-
-.burger span::after {
-  content: '';
-  position: absolute;
-  top: 6px;
-}
+.burger span::before { content: ''; position: absolute; top: -6px; }
+.burger span::after { content: ''; position: absolute; top: 6px; }
 
 @media (max-width: 840px) {
-  .burger {
-    display: flex;
-  }
+  .burger { display: flex; }
   .menu {
     position: fixed;
     top: 64px;
@@ -237,10 +200,10 @@ input:focus-visible {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+    linear-gradient(rgba(107, 143, 113, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(107, 143, 113, 0.08) 1px, transparent 1px);
   background-size: 40px 40px;
-  opacity: 0.3;
+  opacity: 0.35;
 }
 
 .hero-inner {
@@ -266,36 +229,22 @@ input:focus-visible {
 
 .badge {
   display: inline-block;
-  background: rgba(59, 130, 246, 0.1);
+  background: rgba(107, 143, 113, 0.10);
   color: var(--acc1);
   padding: 6px 12px;
   border-radius: 20px;
   font-size: 14px;
   font-weight: 500;
-  border: 1px solid rgba(59, 130, 246, 0.2);
+  border: 1px solid rgba(107, 143, 113, 0.25);
 }
 
-.hero-copy p {
-  font-size: 18px;
-  color: var(--fg-muted);
-  margin-bottom: 32px;
-}
+.hero-copy p { font-size: 18px; color: var(--fg-muted); margin-bottom: 32px; }
 
-.cta {
-  display: flex;
-  gap: 16px;
-  margin-bottom: 32px;
-}
+.cta { display: flex; gap: 16px; margin-bottom: 32px; }
 
-.hero-highlights {
-  display: flex;
-  gap: 24px;
-}
+.hero-highlights { display: flex; gap: 24px; }
 
-.hero-highlights span {
-  font-size: 14px;
-  color: var(--fg-muted);
-}
+.hero-highlights span { font-size: 14px; color: var(--fg-muted); }
 
 .hero-highlights span::before {
   content: '✓';
@@ -310,21 +259,12 @@ input:focus-visible {
 }
 
 @media (max-width: 1024px) {
-  .hero-inner {
-    grid-template-columns: 1fr;
-    gap: 40px;
-    text-align: center;
-  }
+  .hero-inner { grid-template-columns: 1fr; gap: 40px; text-align: center; }
 }
 
 @media (max-width: 640px) {
-  .cta {
-    flex-direction: column;
-    align-items: center;
-  }
-  .hero-highlights {
-    justify-content: center;
-  }
+  .cta { flex-direction: column; align-items: center; }
+  .hero-highlights { justify-content: center; }
 }
 
 /* =======================
@@ -344,11 +284,7 @@ input:focus-visible {
   transform: translateY(-2px);
 }
 
-.card-title {
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 8px;
-}
+.card-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
 
 /* =======================
    BUTTONS
@@ -367,13 +303,10 @@ input:focus-visible {
   transition: transform var(--motion-fast), box-shadow var(--motion-fast), filter var(--motion-fast);
 }
 
-.btn-primary {
-  background: var(--acc1);
-  color: white;
-}
+.btn-primary { background: var(--acc1); color: white; }
 
 .btn-primary:hover {
-  filter: brightness(1.1);
+  filter: brightness(1.05);
   box-shadow: var(--elev-2);
   transform: translateY(-2px);
 }
@@ -399,10 +332,7 @@ input:focus-visible {
   opacity: 0;
 }
 
-.animate-in {
-  transform: translateY(0);
-  opacity: 1;
-}
+.animate-in { transform: translateY(0); opacity: 1; }
 
 /* =======================
    SOLUTIONS GRID
@@ -418,25 +348,17 @@ input:focus-visible {
   transition: border-color var(--motion-med), box-shadow var(--motion-med), transform var(--motion-med), max-height var(--motion-slow), padding var(--motion-slow);
 }
 
-.solution-card:hover {
-  border-color: var(--acc1);
-  box-shadow: var(--elev-1);
-  transform: translateY(-2px);
-}
+.solution-card:hover { border-color: var(--acc1); box-shadow: var(--elev-1); transform: translateY(-2px); }
 
-.solution-card.expanded {
-  max-height: 1000px;
-  padding: 24px;
-}
+.solution-card.expanded { max-height: 1000px; padding: 24px; }
 
-.expand-button .expand-icon {
-  display: inline-block;
-  transition: transform var(--motion-fast);
-}
+.expand-button .expand-icon { display: inline-block; transition: transform var(--motion-fast); }
 
-.solution-card.expanded .expand-icon {
-  transform: rotate(180deg);
-}
+.solution-card.expanded .expand-icon { transform: rotate(180deg); }
+
+/* =======================
+   FOOTER
+======================= */
 .footer {
   background: var(--bg-2);
   border-top: 1px solid var(--b);
@@ -452,15 +374,9 @@ input:focus-visible {
   gap: 12px;
 }
 
-.footer-brand {
-  font-weight: 600;
-  color: var(--fg);
-}
+.footer-brand { font-weight: 600; color: var(--fg); }
 
-.footer-links {
-  display: flex;
-  gap: 20px;
-}
+.footer-links { display: flex; gap: 20px; }
 
 .footer-links a {
   color: var(--fg-muted);
@@ -469,23 +385,11 @@ input:focus-visible {
   transition: color var(--motion-fast) var(--ease-standard);
 }
 
-.footer-links a:hover {
-  color: var(--acc1);
-}
+.footer-links a:hover { color: var(--acc1); }
 
-.footer-copy {
-  font-size: 0.85rem;
-  color: var(--fg-muted);
-}
+.footer-copy { font-size: 0.85rem; color: var(--fg-muted); }
 
 /* Keep footer at bottom if page content is short */
-html, body {
-  height: 100%;
-}
-body {
-  display: flex;
-  flex-direction: column;
-}
-.footer {
-  margin-top: auto;
-}
+html, body { height: 100%; }
+body { display: flex; flex-direction: column; }
+.footer { margin-top: auto; }
