@@ -373,9 +373,9 @@
     window.addEventListener('scroll', () => {
       const header = document.querySelector('.header');
       if (window.scrollY > 100) {
-        header.style.background = 'rgba(11, 18, 32, 0.98)';
+        header.style.background = 'rgba(238, 245, 238, 0.95)'; // very light green (~#EEF5EE)
       } else {
-        header.style.background = 'rgba(11, 18, 32, 0.95)';
+        header.style.background = 'rgba(255, 255, 255, 0.90)'; // white at top
       }
     });
 
@@ -384,7 +384,7 @@
       card.addEventListener('mouseenter', () => {
         card.style.transform = 'translateY(-12px) scale(1.02)';
       });
-      
+    
       card.addEventListener('mouseleave', () => {
         card.style.transform = 'translateY(0) scale(1)';
       });
@@ -395,18 +395,11 @@
       const grid = document.querySelector('.bg-grid');
       const scrolled = window.pageYOffset;
       const rate = scrolled * -0.5;
-      
+    
       if (grid) {
         grid.style.transform = `translateY(${rate}px)`;
       }
     });
-
-    // Intersection observer for enhanced animations
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
