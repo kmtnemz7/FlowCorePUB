@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FlowCore Client Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0b1220;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #111827;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid #1f2937;
+        }
+        header h1 {
+            margin: 0;
+            color: #00d1b2;
+        }
+        main {
+            padding: 40px;
+            max-width: 800px;
+            margin: auto;
+            text-align: center;
+        }
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: #00d1b2;
+            color: #0b1220;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #00b89c;
+        }
+        .status {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #1f2937;
+            border-radius: 8px;
+            text-align: left;
+        }
+        .status h2 {
+            margin-top: 0;
+            color: #00d1b2;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>FlowCore Client Portal</h1>
+</header>
+
+<main>
+    <p>Welcome to your client portal. Use the button below to connect your Outlook account so FlowCore can send and track emails for you.</p>
+
+    <!-- Replace NANGO_HOST and CLIENT_ID dynamically in production -->
+    <a class="btn" 
+       href="https://api.nango.dev/connect/microsoft?connection_id=8f6eec44-8b00-473d-bdd2-1389085b10d6&return_url=https%3A%2F%2Fflowcore.systems%2Fclient-portal-1612f143g132eedr">
+        Connect Outlook
+    </a>
+
+    <div class="status">
+        <h2>Connection Status</h2>
+        <p id="status-text">Not connected</p>
+    </div>
+</main>
+
+<script>
+    // Example: read a query param from return_url to show "Connected"
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('connected') === 'true') {
+        document.getElementById('status-text').textContent = '✅ Connected to Outlook';
+    }
+</script>
+</body>
+</html>
